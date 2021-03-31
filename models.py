@@ -29,6 +29,17 @@ class animaux_types(db.Model):
 
 class velages(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    mere_id = db.Column(db.Integer, primary_key=False, nullable=False)
+    mere_id = db.relationship('animaux_id')
     pere_id = db.Column(db.Integer, primary_key=False, nullable=False)
     date = db.Column(db.DateTime, primary_key=False, nullable=False)
+
+class animaux_velages(db.Model):
+    animal_id = db.Column(db.Integer, primary_key=True)
+    velage_id = db.Column(db.Integer, primary_key=True)
+
+class complications(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    complication = db.Column(db.String(64))
+class velages_complications:
+    velage_id = db.Column(db.Integer, primary_key=True)
+    complication_id = db.Column(db.Integer, primary_key=True)
