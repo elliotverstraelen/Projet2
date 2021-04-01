@@ -1,0 +1,64 @@
+CREATE TABLE animaux (
+    id            INT                 NOT NULL,
+    famille_id    INT                 NOT NULL,
+    sexe          TEXT                NOT NULL,
+    presence      TEXT                NOT NULL,
+    apprivoise    TEXT                NOT NULL, 
+    mort_ne       TEXT                NOT NULL,
+    decede        TEXT                NOT NULL,
+    CONSTRAINT PK_animaux PRIMARY KEY (id),
+    FOREIGN KEY (famille_id) REFERENCES familles (id)
+);
+
+CREATE TABLE familles (
+    id     INT                  ,
+    nom    TEXT                 NOT NULL,
+    CONSTRAINT PK_familles PRIMARY KEY (id)
+);
+
+CREATE TABLE types (
+    id      INT                 ,
+    type    TEXT                NOT NULL,
+    CONSTRAINT PK_types PRIMARY KEY (id)
+);
+
+CREATE TABLE animaux_types (
+    animal_id   INT                  ,
+    type_id     INT                  ,
+    pourcentage REAL                 NOT NULL,
+    CONSTRAINT PK_animaux_types PRIMARY KEY (animal_id,type_id),
+    FOREIGN KEY (type_id) REFERENCES types (id),
+    FOREIGN KEY (animal_id) REFERENCES animaux (id)
+);
+
+CREATE TABLE velages (
+    id            INT                 ,
+    mere_id       INT                 NOT NULL,
+    pere_id       INT                 NOT NULL,
+    date          TEXT                NOT NULL,
+    CONSTRAINT PK_velages PRIMARY KEY (id),
+    FOREIGN KEY (mere_id) REFERENCES animaux (id),
+    FOREIGN KEY (pere_id) REFERENCES animaux (id)
+);
+
+CREATE TABLE animaux_velages (
+    animal_id     INT                 ,
+    velage_id     INT                 ,
+    CONSTRAINT PK_animaux_velages PRIMARY KEY (animal_id,velage_id),
+    FOREIGN KEY (velage_id) REFERENCES velages (id),
+    FOREIGN KEY (animal_id) REFERENCES animaux (id)
+);
+
+CREATE TABLE complications (
+    id              INT               ,
+    complication    TEXT              NOT NULL,
+    CONSTRAINT PK_complications PRIMARY KEY (id)
+);
+
+CREATE TABLE velages_complications (
+    velage_id             INT               ,
+    complication_id       INT               ,
+    CONSTRAINT PK_velages_complications PRIMARY KEY (velage_id,complication_id),
+    FOREIGN KEY (complication_id) REFERENCES complications (id),
+    FOREIGN KEY (velage_id) REFERENCES velages (id)
+);
