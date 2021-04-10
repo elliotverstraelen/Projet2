@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Question 7.X{% endblock %}
+{% block content %}
+<h1>Les données</h1>
+<h5>Le vendeur de dose d'insémination nous propose de racheter des doses d'un taureau ou d'un enfant d'un taureau que nous avons déjà eu. Nous pouvons uitliser les données des eaux déjà nés pour évaluer le taueau au sein de notre ferme.</h5>
+<h5>1. Quel fut son utilisation ?</h5>
+<h5>2. Quelles sont ses statistiques ?</h5>
+<h5>3. Combien de descendants avons-nous encore ?</h5>
+<h5>Pour chacun, vient-il d'une bonne famille ou une famille avec problèmes?</h5>
+<p>Description des données...</p>
+<h5>Représentation par un tableau</h5>
+<table>empty</table>
+<h5>Représentation Graphique</h5>
+<canvas id="graphique" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas>
+
+
+<script>
+    var chartData = {
+                labels : [
+                    {% for item in labels %}
+                    "{{ item }}",
+                    {% endfor %}
+                ],
+                datasets : [{
+                    label: 'Assets',
+                    fill: true,
+                    lineTension: 0.1,
+                    backgroundColor: "rgba(75,192,192,0.4)",
+                    borderColor: "rgba(75,192,192,1)",
+                
+                    data : [
+                    {% for item in values %}
+                    "{{ item }}",
+                    {% endfor %}
+                ],
+                    spanGaps: false
+                }]
+            }
+            var ctx = document.getElementById('graphique').getContext('2d');
+            
+            var myChart = new Chart(ctx, {
+            type: 'bar',   // le type du graphique
+            data: chartData,
+            });
+</script>
+{% endblock %}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+        <title>La ferme des 3 Chênes</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css')}}">
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="container">
+                <a class="logo" href="#">LaFermeDes3<span>Chênes</span></a>
+
+                <nav>
+                    <ul class="primary-nav">
+                        <li class="current"><a href="#">Home</a></li>
+                        <li><a href="#">Statistiques et chiffres</a></li>
+                    </ul>
+
+                    <ul class="secondary-nav">
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <section class="hero">
+            <div class="container">
+                <div class="left-col">
+                    <p class="subhead">La ferme des 3 Chênes</p>
+                    <h1>Une ferme proche de ses vaches</h1>
+
+
+                </div>
+
+                <img src="{{ url_for('static', filename='vaches.jpg')}}" class="hero-img" alt="Une vache de la ferme">
+            </div>
+        </section>
+
+        <section class="graph-section">
+            <div class="container">
+                <h1>Statistiques et chiffres</h1>
+                <h2 class="graph"> Graphique 1 </h2>
+                <canvas id="graphique" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas>
+                <p>
+                </p>
+
+                <h2 class="graph"> Graphique 2 </h2>
+                <canvas id="graphique2" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas>
+                <p>
+                </p>
+
+                <h2 class="graph"> Graphique 3 </h2>
+                <canvas id="graphique3" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas>
+                <p>
+
+                </p>
+
+                <h2 class="graph"> Graphique 4 </h2>
+                <p>
+
+                </p>
+
+                <h2 class="graph"> Graphique 5 </h2>
+                <p>
+
+                </p>
+            </div>
+
+            <script>
+            //Graphique 1                              //Données Chart.js pour les graphiques
+            // l'identifiant est celui du canevas
+            var ctx = document.getElementById('graphique').getContext('2d');
+            // création du graphique
+            var nbVaches = 2012;
+            var nbTaureaux = 2245;
+            var nbTot = 4304;
+            var nbPresent = 372;
+            var nbApprivoise = 54;
+            var nbPrseAppr = 18;
+            var myChart = new Chart(ctx, {
+            type: 'pie',   // le type du graphique
+            data: {        // les données
+                labels: ['Vaches', 'Taureaux', 'Indéterminé'],
+                datasets: [{
+                            label: 'Animaux',
+                            data: [nbVaches, nbTaureaux, nbTot - (nbVaches + nbTaureaux)],
+                            backgroundColor: ["rgb(54, 162, 235)","rgb(255, 205, 86)", "rgb(255, 99, 132)"]
+                           }]
+                   }
+                }
+            );
+            
+            //Graphique 2
+            var ctx = document.getElementById('graphique2').getContext('2d');
+            var myChart2 = new Chart(ctx, {
+            type: 'bar',   // le type du graphique
+            data: {        // les données
+                labels: ['Présents', 'Apprivoisés', 'Présents & apprivoisés'],
+                datasets: [{
+                            label: 'Animaux',
+                            data: [nbPresent, nbApprivoise, nbPrseAppr],
+                            backgroundColor: ["rgb(201, 203, 207)", "rgba(153, 102, 255, 0.2)", "rgba(75, 192, 192, 0.2)"]
+                           }]
+                   },
+            options: {
+                legend: {
+                    display: false
+                }
+            }
+            });
+
+            //Graphique 3 _ Test
+
+            var chartData = {
+                labels : [
+                    {% for item in labels %}
+                             "{{ item }}",
+                             {% endfor %}
+                    ],
+                datasets : [{
+                    label: 'Assets',
+                    fill: true,
+                    lineTension: 0.1,
+                    backgroundColor: "rgba(75,192,192,0.4)",
+                    borderColor: "rgba(75,192,192,1)",
+                
+                    data : [
+                        {% for item in values %}
+                            {{item}},
+                        {% endfor %}
+                    ],
+                    spanGaps: false
+  }]
+}
+            var ctx = document.getElementById('graphique3').getContext('2d');
+            
+            var myChart = new Chart(ctx, {
+            type: 'bar',   // le type du graphique
+            data: chartData,
+            });
+            </script>
+
+        </section>
+
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-left">
+                    <h3>Contact</h3>
+
+                    <form action="">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Votre nom">
+
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email">
+
+                        <label for="message">Message</label>
+                        <textarea name="message" id="message" cols="30" rows="10" placeholder="Entrez votre message"></textarea>
+
+                        <input type="submit" class="send-message-cta" value="Envoyer le message">
+                    </form>
+                </div>
+                <div class="contact-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19982.286827397347!2d5.737233232085944!3d49.880466989612856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c01df436e95bc9%3A0xd6def8515e714d03!2sLa%20Ferme%20des%202%20Fontaines!5e0!3m2!1sfr!2slu!4v1617271656448!5m2!1sfr!2slu" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+
+            </div>
+        </section>
+    </body>
+</html>

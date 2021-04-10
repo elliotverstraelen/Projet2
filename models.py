@@ -14,7 +14,7 @@ class animaux(db.Model):
     decede = db.Column(db.String(64), unique=False, nullable = False)
 
 
-class famillies(db.Model):
+class familles(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nom = db.Column(db.String(64), primary_key=False, nullable=False)
 

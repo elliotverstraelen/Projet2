@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Add data{% endblock %}
+{% block content %}
+<form>
+    <div class="form-group">
+        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Choisir une base de donnée</label>
+        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+            <option selected>Choisir...</option>
+            <option value="animaux">Animaux</option>
+            <option value="familles">Familles</option>
+            <option value="types">Types</option>
+            <option value="animaux-types">Animaux-types</option>
+            <option value="velages">Velages</option>
+            <option value="animaux-velage">Animaux-velage</option>
+            <option value="complications">Complications</option>
+            <option value="velages-complications">Velages-Complications</option>
+        </select>
+    </div>
+</form>
+{% endblock %}

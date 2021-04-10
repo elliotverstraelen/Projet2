@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Question 3.3{% endblock %}
+{% block content %}
+<h1>Les données</h1>
+<h5>Il arrive malheureusement qu'un veau soit mort-né. Pour en diminuer le nombre, il est utile de savoir quelles peuvent en être certaines causes.</h5>
+<h6>Y a-t-il un père pour lequel cela arrive souvent ?</h6>
+<p>Description des données...</p>
+<h5>Représentation par un tableau</h5>
+<table>empty</table>
+<h5>Représentation Graphique</h5>
+<canvas id="graphique" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas>
+
+
+<script>
+    //Graphique 3 _ Test
+
+    var chartData = {
+                labels : [
+                    {% for item in labels %}
+                    "{{ item }}",
+                    {% endfor %}
+                ],
+                datasets : [{
+                    label: 'Assets',
+                    fill: true,
+                    lineTension: 0.1,
+                    backgroundColor: "rgba(75,192,192,0.4)",
+                    borderColor: "rgba(75,192,192,1)",
+                
+                    data : [
+                    {% for item in values %}
+                    "{{ item }}",
+                    {% endfor %}
+                ],
+                    spanGaps: false
+                }]
+            }
+            var ctx = document.getElementById('graphique').getContext('2d');
+            
+            var myChart = new Chart(ctx, {
+            type: 'bar',   // le type du graphique
+            data: chartData,
+            });
+</script>
+{% endblock %}
