@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Projet2</title>
+{% endblock %}
+
+{% block body %}
+
+
+
+
+<canvas id="graphique" width="200" height="50"></canvas>
+      <script>
+    // l'identifiant est celui du canevas
+	var ctx = document.getElementById('graphique').getContext('2d');
+	// création du graphique
+    var pourcentage_1 = {{type1}} / ({{type1}} + {{type2}} + {{type3}}) 
+    var pourcentage_2 = {{type2}} / ({{type1}} + {{type2}} + {{type3}}) 
+    var pourcentage_3 = {{type3}} / ({{type1}} + {{type2}} + {{type3}}) 
+	var myChart = new Chart(ctx, {
+    type: 'pie',   // le type du graphique
+	data: {        // les données
+        labels: ['Holstein', 'Blanc Bleu Belge', 'Jersey'],
+        datasets: [{ 
+                    label: 'votes',
+                    data: [pourcentage_1, pourcentage_2, pourcentage_3],
+                    backgroundColor: ["rgb(54, 162, 235)","rgb(255, 205, 86)", "rgb(255, 99, 132)"]
+                   }]
+	       }
+         }
+	);
+      </script> 
+<center><h3>pourcentage des types d'animaux</h3></center>      
+      
+
+{% endblock %}

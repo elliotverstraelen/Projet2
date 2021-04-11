@@ -1,8 +1,14 @@
-from app import db
+from flask_sqlalchemy import SQLAlchemy
+from flask import Flask
+
+app = Flask(__name__)
+#app.config.from_object('config')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////DataFerme.db'
+db = SQLAlchemy(app)
 
 
 class animaux(db.Model):
-    """Data Model for animals"""
+    #Data Model for animals
 
     __tablename__ = 'animals_table'
     id = db.Column(db.Integer, primary_key=True)
@@ -29,8 +35,13 @@ class animaux_types(db.Model):
 
 class velages(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    mere_id = db.relationship('animaux_id')
-    pere_id = db.Column(db.Integer, primary_key=False, nullable=False)
+
+    mere_id = db.Column(db.Integer, db.ForeignKey("animaux.id"))
+    pere_id = db.Column(db.Integer, db.ForeignKey("animaux.id"))
+
+    #mere_id = db.relationship('animaux', foreign_keys="velages.mere_id")
+    #pere_id = db.relationship('animaux', foreign_keys="velages.pere_id")
+    
     date = db.Column(db.DateTime, primary_key=False, nullable=False)
 
 class animaux_velages(db.Model):
@@ -40,6 +51,9 @@ class animaux_velages(db.Model):
 class complications(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     complication = db.Column(db.String(64))
-class velages_complications:
+
+class velages_complications(db.Model):
     velage_id = db.Column(db.Integer, primary_key=True)
-    complication_id = db.Column(db.Integer, primary_key=True)
+    complication_id = db.Column(db.Integer, primary_key=True)     
+
+db.create_all()
