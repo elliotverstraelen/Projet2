@@ -31,14 +31,13 @@ data = (
 
 
 
-#@app.route('/')
+@app.route('/home')
 def home():
     return render_template('home.html')
 
 @app.route('/')
 def table():
     type1 = db.session.query(Animaux_types).filter(Animaux_types.type_id == 1).count()
-    print(type1) #egal à 0
     type2 = db.session.query(Animaux_types).filter(Animaux_types.type_id == 2).count()
     type3 = db.session.query(Animaux_types).filter(Animaux_types.type_id == 3).count()
     types_name = db.session.query(Types.type).all()

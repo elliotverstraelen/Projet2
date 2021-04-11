@@ -1,16 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-    <div class="sidenav">
-        <h1>Le projet</h1>
-        <a href="/">Graph Population des 3 Familles</a>
-        <a href="/test">Test</a>
-    </div>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+    <div class="navbar-exapand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">LaFermeDes3Chênes</a>
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class ="nav-item">
+                            <a class="nav-link" aria-current="page" href="/home">Q1</a>
+                        </li>
+                        <li class ="nav-item">
+                            <a class="nav-link" href="/test">Test Q2</a>
+                        </li>
+                        <li class ="nav-item">
+                            <a class="nav-link" href="q1">Q3</a>
+                        </li>
+                        <li class ="nav-item">
+                            <a class="nav-link" href="q1">Q4</a>
+                        </li>
+                        <li class ="nav-item">
+                            <a class="nav-link" href="q1">Q5</a>
+                        </li>
+                        <li class ="nav-item">
+                            <a class="nav-link" href="q1">Q6</a>
+                        </li>
+                        <li class ="nav-item">
+                            <a class="nav-link disabled" aria-disabled="true" href="q1">Q7</a>
+                        </li>
+                    </ul>
+                </div>  
+            </nav>
+        </div>
+    </div>
     {% block head %}{% endblock %}
 </head>
 <body>
