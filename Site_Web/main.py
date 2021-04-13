@@ -7,5 +7,3 @@ if __name__ == '__main__' :  #Execute la ligne seulement si on execute le fichie
     app.run(debug=True)  # Demarre le site et debug redémarre le site dès qu'un changement est fait
 
 #42
-
-

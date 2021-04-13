@@ -1,45 +1,137 @@
 {% extends "base.html" %}
-{% block title %}Question 3.3{% endblock %}
+{% block title %}Question 7{% endblock %}
 {% block content %}
 <h1>Les données</h1>
-<h5>Il arrive malheureusement qu'un veau soit mort-né. Pour en diminuer le nombre, il est utile de savoir quelles peuvent en être certaines causes.</h5>
-<h6>Y a-t-il un père pour lequel cela arrive souvent ?</h6>
-<p>Description des données...</p>
-<h5>Représentation par un tableau</h5>
-<table>empty</table>
-<h5>Représentation Graphique</h5>
-<canvas id="graphique" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas>
+<h5>Le vendeur de dose d’insémination nous propose de racheter des doses d’un taureau ou d’un enfant d’un taureau que nous avons déjà eu. Nous pouvons utiliser les données des veaux déjà nés pour évaluer le taureau au sein de notre ferme.</h5>
+<h6>1. Quel fut son utilisation ?</h6>
+<h6>2. Quelles sont ses statistiques ?</h6>
+<h6>3. Combien de descendantes avons-nous encore (filles, petites filles, arrière petites filles, stack bar chart par taureau) ?</h6><br>
+
+<h3>7.1</h3>
+<h5>Représentation par tableau</h5>
+<table></table><br>
+<h5>Représentation graphique</h5>
+<!--(graphe par mois du nombre de veau né de ce taureau, veau de 2ème génération, de 3ème génération)-->
+<canvas id="graphique7.1" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
+
+<h3>7.2</h3>
+<h5>Représentation par tableau</h5>
+<table></table><br>
+<h5>Représentation graphique</h5>
+<!--(% femelle, % jumaux, % mort né/DCD, % problèmes, …)-->
+<canvas id="graphique7.2" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
+
+<h3>7.3</h3>
+<h5>Représentation par tableau</h5>
+<table></table><br>
+<h5>Représentation graphique</h5>
+<!--(stack bar chart par taureau)-->
+<canvas id="graphique7.3" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
+
+
 
 
 <script>
-    //Graphique 3 _ Test
-
-    var chartData = {
-                labels : [
-                    {% for item in labels %}
-                    "{{ item }}",
-                    {% endfor %}
-                ],
-                datasets : [{
-                    label: 'Assets',
-                    fill: true,
-                    lineTension: 0.1,
-                    backgroundColor: "rgba(75,192,192,0.4)",
-                    borderColor: "rgba(75,192,192,1)",
-                
-                    data : [
-                    {% for item in values %}
-                    "{{ item }}",
-                    {% endfor %}
-                ],
-                    spanGaps: false
-                }]
+var ctx = document.getElementById('graphique7.1').getContext('2d');
+var chartData = {
+    labels : [
+    {% for item in labels %}
+    "{{ item }}",
+    {% endfor %}
+    ],
+    datasets : [{
+        label : "Assets",
+        fill : true,
+        lineTension : 0.1,
+        backgroundColor : "rgba(0, 100, 200, 0.5)",
+        borderColor : "rgba(0, 100, 200, 1)",
+        borderWidth: 1,
+        data : [
+        {% for item in values %}
+        "{{ item }}",
+        {% endfor %}
+        ],
+        spanGaps : false
+    }]
+};
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: chartData,
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
             }
-            var ctx = document.getElementById('graphique').getContext('2d');
-            
-            var myChart = new Chart(ctx, {
-            type: 'bar',   // le type du graphique
-            data: chartData,
-            });
+        }
+    }
+});
+
+var ctx = document.getElementById('graphique7.2').getContext('2d');
+var chartData = {
+    labels : [
+    {% for item in labels %}
+    "{{ item }}",
+    {% endfor %}
+    ],
+    datasets : [{
+        label : "Assets",
+        fill : true,
+        lineTension : 0.1,
+        backgroundColor : "rgba(0, 100, 200, 0.5)",
+        borderColor : "rgba(0, 100, 200, 1)",
+        borderWidth: 1,
+        data : [
+        {% for item in values %}
+        "{{ item }}",
+        {% endfor %}
+        ],
+        spanGaps : false
+    }]
+};
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: chartData,
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+var ctx = document.getElementById('graphique7.3').getContext('2d');
+var chartData = {
+    labels : [
+    {% for item in labels %}
+    "{{ item }}",
+    {% endfor %}
+    ],
+    datasets : [{
+        label : "Assets",
+        fill : true,
+        lineTension : 0.1,
+        backgroundColor : "rgba(0, 100, 200, 0.5)",
+        borderColor : "rgba(0, 100, 200, 1)",
+        borderWidth: 1,
+        data : [
+        {% for item in values %}
+        "{{ item }}",
+        {% endfor %}
+        ],
+        spanGaps : false
+    }]
+};
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: chartData,
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
 </script>
 {% endblock %}

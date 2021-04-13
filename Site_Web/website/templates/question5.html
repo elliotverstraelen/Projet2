@@ -1,45 +1,66 @@
 {% extends "base.html" %}
-{% block title %}Question 3.3{% endblock %}
+{% block title %}Question 5{% endblock %}
 {% block content %}
 <h1>Les données</h1>
-<h5>Il arrive malheureusement qu'un veau soit mort-né. Pour en diminuer le nombre, il est utile de savoir quelles peuvent en être certaines causes.</h5>
-<h6>Y a-t-il un père pour lequel cela arrive souvent ?</h6>
-<p>Description des données...</p>
-<h5>Représentation par un tableau</h5>
-<table>empty</table>
-<h5>Représentation Graphique</h5>
-<canvas id="graphique" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas>
+<h5>Les vendeurs de doses pour l’insémination artificielle nous proposent des doses sexées (promettant 90% de veaux femelles). Comme elles sont également plus chères, il faut bien choisir les animaux sur lesquelles les mettre pour s’assurer que la dose n’est pas perdue. On va préférer les vaches provenant de familles qui font moins de femelle de base, et pour lesquelles il y a peu de jumeaux (il est moins probable que la gestation aille jusqu’au bout dans des cas de jumeaux) et le moins de morts à la naissance ou prématurées, afin de maximiser l’utilité de la dose.<br><br>Quelles familles sont les meilleures suivant ces critères-là ?</h5><br>
+
+<h5>Représentation par tableau</h5>
+<table></table><br>
+<h5>Représentation graphique</h5>
+<!--(multi-line ou multi bar chart, une line par % de chaque statistique, par famille)-->
+<canvas id="graphique5" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
+
+
 
 
 <script>
-    //Graphique 3 _ Test
-
-    var chartData = {
-                labels : [
-                    {% for item in labels %}
-                    "{{ item }}",
-                    {% endfor %}
-                ],
-                datasets : [{
-                    label: 'Assets',
-                    fill: true,
-                    lineTension: 0.1,
-                    backgroundColor: "rgba(75,192,192,0.4)",
-                    borderColor: "rgba(75,192,192,1)",
-                
-                    data : [
-                    {% for item in values %}
-                    "{{ item }}",
-                    {% endfor %}
-                ],
-                    spanGaps: false
-                }]
+var ctx = document.getElementById('graphique5').getContext('2d');
+var chartData = {
+    labels : [
+    {% for item in labels %}
+    "{{ item }}",
+    {% endfor %}
+    ],
+    datasets : [{
+        label : "Assets",
+        fill : true,
+        lineTension : 0.1,
+        backgroundColor : "rgba(0, 100, 200, 0.5)",
+        borderColor : "rgba(0, 100, 200, 1)",
+        borderWidth: 1,
+        data : [
+        {% for item in values %}
+        "{{ item }}",
+        {% endfor %}
+        ],
+        spanGaps : false
+    }]
+};
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: chartData,
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
             }
-            var ctx = document.getElementById('graphique').getContext('2d');
-            
-            var myChart = new Chart(ctx, {
-            type: 'bar',   // le type du graphique
-            data: chartData,
-            });
+        }
+    }
+});
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 {% endblock %}

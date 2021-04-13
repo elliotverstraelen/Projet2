@@ -13,124 +13,27 @@
 
 <section class="graph-section">
     <div class="container">
-        <h1>Statistiques et chiffres</h1>
-        <h2 class="graph"> Graphique 1 </h2>
-        </p>
-
-        <h2 class="graph"> Graphique 2 </h2>
-        <canvas id="graphique2" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas>
-        <p>
-        </p>
-
-        <h2 class="graph"> Graphique 3 </h2>
-        <canvas id="graphique3" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas>
-        <p>
-
-        </p>
-
-        <h2 class="graph"> Graphique 4 </h2>
-        <p>
-
-        </p>
-
-        <h2 class="graph"> Graphique 5 </h2>
-        <p>
-
-        </p>
+        <h2>Description du projet</h2>
+        <p>Dans le cadre de ce projet, nous avions la tâche de blablabla</p>        
+        <p>Pour chaque problème nous avons analysé les données à notre disposition blablabla (voir barre de navigation)</p>
     </div>
-
-    <script>
-    //Graphique 1                              //Données Chart.js pour les graphiques
-    // l'identifiant est celui du canevas
-    var ctx = document.getElementById('graphique').getContext('2d');
-    // création du graphique
-    var nbVaches = 2012;
-    var nbTaureaux = 2245;
-    var nbTot = 4304;
-    var nbPresent = 372;
-    var nbApprivoise = 54;
-    var nbPrseAppr = 18;
-    var myChart = new Chart(ctx, {
-    type: 'pie',   // le type du graphique
-    data: {        // les données
-        labels: ['Vaches', 'Taureaux', 'Indéterminé'],
-        datasets: [{
-                    label: 'Animaux',
-                    data: [nbVaches, nbTaureaux, nbTot - (nbVaches + nbTaureaux)],
-                    backgroundColor: ["rgb(54, 162, 235)","rgb(255, 205, 86)", "rgb(255, 99, 132)"]
-                   }]
-           }
-        }
-    );
-    
-    //Graphique 2
-    var ctx = document.getElementById('graphique2').getContext('2d');
-    var myChart2 = new Chart(ctx, {
-    type: 'bar',   // le type du graphique
-    data: {        // les données
-        labels: ['Présents', 'Apprivoisés', 'Présents & apprivoisés'],
-        datasets: [{
-                    label: 'Animaux',
-                    data: [nbPresent, nbApprivoise, nbPrseAppr],
-                    backgroundColor: ["rgb(201, 203, 207)", "rgba(153, 102, 255, 0.2)", "rgba(75, 192, 192, 0.2)"]
-                   }]
-           },
-    options: {
-        legend: {
-            display: false
-        }
-    }
-    });
-
-    //Graphique 3 _ Test
-
-    var chartData = {
-        labels : [
-            {% for item in labels %}
-                     "{{ item }}",
-                     {% endfor %}
-            ],
-        datasets : [{
-            label: 'Assets',
-            fill: true,
-            lineTension: 0.1,
-            backgroundColor: "rgba(75,192,192,0.4)",
-            borderColor: "rgba(75,192,192,1)",
-        
-            data : [
-                {% for item in values %}
-                    {{item}},
-                {% endfor %}
-            ],
-            spanGaps: false
-        }]
-    }
-    var ctx = document.getElementById('graphique3').getContext('2d');
-    
-    var myChart = new Chart(ctx, {
-    type: 'bar',   // le type du graphique
-    data: chartData,
-    });
-    </script>
-
 </section>
 
 <section class="contact-section">
     <div class="container">
         <div class="contact-left">
             <h3>Contact</h3>
-
             <form action="">
                 <label for="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="Votre nom">
-
+                <input type="text" id="name" name="name" placeholder="Votre nom" size="50"><br>
+                <br>
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email">
-
+                <input type="email" id="email" name="email" size="50"><br>
+                <br>
                 <label for="message">Message</label>
-                <textarea name="message" id="message" cols="30" rows="10" placeholder="Entrez votre message"></textarea>
-
-                <input type="submit" class="send-message-cta" value="Envoyer le message">
+                <textarea name="message" id="message" cols="30" rows="10" placeholder="Entrez votre message" size="50"></textarea><br>
+                <br>
+                <input type="submit" class="send-message-cta" value="Envoyer le message" size="50">
             </form>
         </div>
         <div class="contact-map">
