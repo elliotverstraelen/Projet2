@@ -1,3 +1,52 @@
 {% extends "base.html" %}
 {% block title %}Question 2{% endblock %}
+{% block content %}
 <!--Je sais pas si quelqu'un veut faire cette question mais au moins la barre de navigation semble plus complète-->
+<h1>Les données</h1>
+<h5>Une vache fait généralement son premier veau à l’âge de 2 ans. Avant ce premier veau, elle n’est pas économiquement utile, puisqu’elle ne produit pas encore de lait. Une exploitation cherche généralement à garder ses vaches le plus longtemps possible, pour maximiser le nombre de lactations (une lactation correspond à un vêlage).<br>Pour chaque année, montrer graphiquement comment tous les vêlages de l’année se répartissent entre premier vêlage, second vêlage, etc, sous forme d’un stacked bar chart.</h5><br>
+
+<h5>Représentation par tableau</h5>
+<table></table><br>
+<h5>Représentation graphique</h5>
+<!--(stacked bar chart)-->
+<canvas id="graphique2" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
+
+
+
+
+<script>
+var ctx = document.getElementById('graphique2').getContext('2d');
+var chartData = {
+    labels : [
+    {% for item in labels %}
+    "{{ item }}",
+    {% endfor %}
+    ],
+    datasets : [{
+        label : "Assets",
+        fill : true,
+        lineTension : 0.1,
+        backgroundColor : "rgba(0, 100, 200, 0.5)",
+        borderColor : "rgba(0, 100, 200, 1)",
+        borderWidth: 1,
+        data : [
+        {% for item in values %}
+        "{{ item }}",
+        {% endfor %}
+        ],
+        spanGaps : false
+    }]
+};
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: chartData,
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+{% endblock %}

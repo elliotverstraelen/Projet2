@@ -6,7 +6,8 @@ views = Blueprint('views', __name__)
 
 
 
-#DATA
+# DATA
+# Importation des données SQL directement ici et les envoyer pour chaque page ?
 labels = [
     'JAN', 'FEB', 'MAR', 'APR',
     'MAY', 'JUN', 'JUL', 'AUG',
@@ -20,18 +21,27 @@ values = [
 ]
 
 
+
+
+
 #Routes
 @views.route('/') # Il s'agit de ce qu'il y a dans l'URL, '/' veut dire pas de prefixe
 def home():       #On ira donc sur la page 'home' lorsqu'il y'a '/' dans l'URL
     return render_template("home.html", labels=labels, values=values)
 
-
-#Figure 1.1
+#Figure 1
 @views.route('/q1')
 def q1():
     bar_labels=labels
     bar_values=values
     return render_template('question1.html', labels=labels, values=values)
+
+#Figure 2 //DISABLED
+@views.route('/q2')
+def q2():
+    bar_labels=labels
+    bar_values=values
+    return render_template('question2.html', labels=labels, values=values)
 
 #Figure 3
 @views.route('/q3')
@@ -67,7 +77,6 @@ def q7():
     bar_labels=labels
     bar_values=values
     return render_template('question7.html', labels=labels, values=values)
-
 
 #add data
 @views.route('/add_data')
