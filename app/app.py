@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.automap import automap_base
 import os
+import sqlite3
 
 
 #import views
@@ -9,7 +10,7 @@ import os
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///E:\COURS\Projet 2\projet\DataFerme.db'    #copy path de l'emplacement de la db chez vous
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///DataFerme.db'   
 db = SQLAlchemy(app)
 
 Base = automap_base()
