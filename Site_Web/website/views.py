@@ -1,6 +1,29 @@
 from flask import Blueprint, render_template  #Permet de créer des routes vers les fichiers
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy.inspection import inspect
+import os
 
 views = Blueprint('views', __name__)
+
+from main import db
+ 
+
+
+Base = automap_base()
+Base.prepare(db.engine, reflect=True)
+
+#Mapping de toutes les tables dans les classes
+Animaux = Base.classes.animaux
+Animaux_types = Base.classes.animaux_types
+Complications = Base.classes.complications
+Familles = Base.classes.familles
+Types = Base.classes.types
+Velages = Base.classes.velages
+
+#Mapping des relations entre 2 tables
+Animaux_velages = Animaux.velages_collection
+Velages_complications = Complications.velages_collection
 
 
 
@@ -55,7 +78,11 @@ def q3():
 def q4():
     bar_labels=labels
     bar_values=values
-    return render_template('question4.html', labels=labels, values=values)
+    type1 = db.session.query(Animaux_types).filter(Animaux_types.type_id == 1).count()
+    type2 = db.session.query(Animaux_types).filter(Animaux_types.type_id == 2).count()
+    type3 = db.session.query(Animaux_types).filter(Animaux_types.type_id == 3).count()
+    types_name = db.session.query(Types.type).all()
+    return render_template('question4.html', labels=labels, values=values, type1=type1, type2=type2, type3=type3)
 
 #Figure 5
 @views.route('/q5')
