@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template  #Permet de créer des routes vers les fichiers
+from flask import Blueprint, render_template  # Permet de créer des routes vers les fichiers
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.inspection import inspect
@@ -13,7 +13,7 @@ from main import db
 Base = automap_base()
 Base.prepare(db.engine, reflect=True)
 
-#Mapping de toutes les tables dans les classes
+# Mapping de toutes les tables dans les classes
 Animaux = Base.classes.animaux
 Animaux_types = Base.classes.animaux_types
 Complications = Base.classes.complications
@@ -21,7 +21,7 @@ Familles = Base.classes.familles
 Types = Base.classes.types
 Velages = Base.classes.velages
 
-#Mapping des relations entre 2 tables
+# Mapping des relations entre 2 tables
 Animaux_velages = Animaux.velages_collection
 Velages_complications = Complications.velages_collection
 
