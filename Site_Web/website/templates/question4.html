@@ -1,38 +1,89 @@
 {% extends "base.html" %}
-{% block title %}Question 4{% endblock %}
+{% block title %}Question 1{% endblock %}
 {% block content %}
 <h1>Les données</h1>
-<h5>Des complications peuvent arriver dans les premières semaines de vie d’un veau. Pour en diminuer le nombre, nous voulons savoir quelles peuvent en être les causes.</h5>
-<h6>1. Y a-t-il un moment particulier durant l’année auquel plus de décès prématurés arrivent ?</h6>
-<h6>2. Y a-t-il une famille particulière chez qui cela arrive plus souvent ?</h6>
-<h6>3. Y a-t-il un père pour lequel cela arrive souvent ?</h6><br>
+<h5>Une croyance populaire chez certains éleveurs est que les naissances arrivent plus souvent à la pleine lune.<br>Est-ce vrai ou pas ?</h5><br>
 
-<h3>4.1</h3>
-<h5>Représentation par tableau</h5>
-<table></table><br>
-<h5>Représentation graphique</h5>
-<!--(chart ou bar plot sur l’année)-->
-<canvas id="graphique4.1" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
-
-<h3>4.2</h3>
-<h5>Représentation par tableau</h5>
-<table></table><br>
-<h5>Représentation graphique</h5>
-<!--(stacked bar plot qui affiche, famille par famille, le nombre de vivants, mort-nés, et décès prématurés, en choisissant une unité de temps adéquate.)-->
-<canvas id="graphique4.2" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
-
-<h3>4.3</h3>
-<h5>Représentation par tableau</h5>
-<table></table><br>
-<h5>Représentation graphique</h5>
-<!--(stacked bar plot par père, affichant le nombre de vivants, mort-nés, et décès prématurés, en choisissant une unité de temps adéquate.)-->
-<canvas id="graphique4.3" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
+<h3>Représentation par tableau</h3>
+<p>Nombre total de vélages par jour du cycle lunaire de Novembre 1990 à Novembre 2020</p>
+<table style="width:100%">
+    <thead>
+        <tr>
+            <th>{{ labels[0] }}</th>
+            <th>{{ labels[1] }}</th>
+            <th>{{ labels[2] }}</th>
+            <th>{{ labels[3] }}</th>
+            <th>{{ labels[4] }}</th>
+            <th>{{ labels[5] }}</th>
+            <th>{{ labels[6] }}</th>
+            <th>{{ labels[7] }}</th>
+            <th>{{ labels[8] }}</th>
+            <th>{{ labels[9] }}</th>
+            <th>{{ labels[10] }}</th>
+            <th>{{ labels[11] }}</th>
+            <th>{{ labels[12] }}</th>
+            <th>{{ labels[13] }}</th>
+            <th>{{ labels[14] }}</th>
+            <th>{{ labels[15] }}</th>
+            <th>{{ labels[16] }}</th>
+            <th>{{ labels[17] }}</th>
+            <th>{{ labels[18] }}</th>
+            <th>{{ labels[19] }}</th>
+            <th>{{ labels[20] }}</th>
+            <th>{{ labels[21] }}</th>
+            <th>{{ labels[22] }}</th>
+            <th>{{ labels[23] }}</th>
+            <th>{{ labels[24] }}</th>
+            <th>{{ labels[25] }}</th>
+            <th>{{ labels[26] }}</th>
+            <th>{{ labels[27] }}</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ values[0] }}</td>
+            <td>{{ values[1] }}</td>
+            <td>{{ values[2] }}</td>
+            <td>{{ values[3] }}</td>
+            <td>{{ values[4] }}</td>
+            <td>{{ values[5] }}</td>
+            <td>{{ values[6] }}</td>
+            <td>{{ values[7] }}</td>
+            <td>{{ values[8] }}</td>
+            <td>{{ values[9] }}</td>
+            <td>{{ values[10] }}</td>
+            <td>{{ values[11] }}</td>
+            <td>{{ values[12] }}</td>
+            <td>{{ values[13] }}</td>
+            <td>{{ values[14] }}</td>
+            <td>{{ values[15] }}</td>
+            <td>{{ values[16] }}</td>
+            <td>{{ values[17] }}</td>
+            <td>{{ values[18] }}</td>
+            <td>{{ values[19] }}</td>
+            <td>{{ values[20] }}</td>
+            <td>{{ values[21] }}</td>
+            <td>{{ values[22] }}</td>
+            <td>{{ values[23] }}</td>
+            <td>{{ values[24] }}</td>
+            <td>{{ values[25] }}</td>
+            <td>{{ values[26] }}</td>
+            <td>{{ values[27] }}</td>
+            <td>{{ somme }}</td>
+        </tr>
+    </tbody>
+</table><br>
+<h3>Représentation graphique</h3>
+<!--(Produire une heat map ou bar chart sur 28 jours avec le % de vêlage.)-->
+<p>Bar chart du nombre total de vélages par jour du cycle lunaire de Novembre 1990 à Novembre 2020<br>J14 = nouvelle lune<br>J28 = pleine lune</p>
+<canvas id="graphique1" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
 
 
 
 
 <script>
-var ctx = document.getElementById('graphique4.1').getContext('2d');
+var ctx = document.getElementById('graphique1').getContext('2d');
 var chartData = {
     labels : [
     {% for item in labels %}
@@ -40,83 +91,15 @@ var chartData = {
     {% endfor %}
     ],
     datasets : [{
-        label : "Assets",
+        label : "Vélages",
         fill : true,
         lineTension : 0.1,
         backgroundColor : "rgba(0, 100, 200, 0.5)",
         borderColor : "rgba(0, 100, 200, 1)",
         borderWidth: 1,
         data : [
-        {% for item in values %}
-        "{{ item }}",
-        {% endfor %}
-        ],
-        spanGaps : false
-    }]
-};
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: chartData,
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-
-var ctx = document.getElementById('graphique4.2').getContext('2d');
-var chartData = {
-    labels : [
-    {% for item in labels %}
-    "{{ item }}",
-    {% endfor %}
-    ],
-    datasets : [{
-        label : "Assets",
-        fill : true,
-        lineTension : 0.1,
-        backgroundColor : "rgba(0, 100, 200, 0.5)",
-        borderColor : "rgba(0, 100, 200, 1)",
-        borderWidth: 1,
-        data : [
-        {% for item in values %}
-        "{{ item }}",
-        {% endfor %}
-        ],
-        spanGaps : false
-    }]
-};
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: chartData,
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-
-var ctx = document.getElementById('graphique4.3').getContext('2d');
-var chartData = {
-    labels : [
-    {% for item in labels %}
-    "{{ item }}",
-    {% endfor %}
-    ],
-    datasets : [{
-        label : "Assets",
-        fill : true,
-        lineTension : 0.1,
-        backgroundColor : "rgba(0, 100, 200, 0.5)",
-        borderColor : "rgba(0, 100, 200, 1)",
-        borderWidth: 1,
-        data : [
-        {% for item in values %}
-        "{{ item }}",
+        {% for compte in values %}
+        "{{ compte }}",
         {% endfor %}
         ],
         spanGaps : false
@@ -134,28 +117,4 @@ var myChart = new Chart(ctx, {
     }
 });
 </script>
-
-
-<canvas id="graphique" width="200" height="50"></canvas>
-      <script>
-    // l'identifiant est celui du canevas
-	var ctx = document.getElementById('graphique').getContext('2d');
-	// création du graphique
-    var pourcentage_1 = {{ type1 }} / ({{type1}} + {{type2}} + {{type3}}); 
-    var pourcentage_2 = {{ type2 }} / ({{type1}} + {{type2}} + {{type3}}); 
-    var pourcentage_3 = {{ type3 }} / ({{type1}} + {{type2}} + {{type3}}); 
-	var myChart = new Chart(ctx, {
-    type: 'pie',   // le type du graphique
-	data: {        // les données
-        labels: ['Holstein', 'Blanc Bleu Belge', 'Jersey'],
-        datasets: [{ 
-                    label: 'votes',
-                    data: [pourcentage_1, pourcentage_2, pourcentage_3],
-                    backgroundColor: ["rgb(54, 162, 235)","rgb(255, 205, 86)", "rgb(255, 99, 132)"]
-                   }]
-	       }
-         }
-	);
-      </script> 
-<center><h3>pourcentage des types d'animaux</h3></center>   
 {% endblock %}
