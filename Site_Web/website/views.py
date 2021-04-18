@@ -55,11 +55,56 @@ def home():       #On ira donc sur la page 'home' lorsqu'il y'a '/' dans l'URL
 #Figure 1
 @views.route('/q1')
 def q1():
-    bar_labels=labels
-    bar_values=values
-    return render_template('question1.html', labels=labels, values=values)
+    #bar_labels=labels
+    #bar_values=values
+    import datetime
+    def add_28(date, j):
+        jour = int(date[0:2])
+        mois = int(date[3:5])
+        an = int(date[6:])
+        day_delta = datetime.timedelta(days=28)
+        start_date = datetime.datetime(an, mois, jour)
+        added_date = start_date + day_delta * j
+        new_jour = added_date.strftime("%d")
+        new_mois = added_date.strftime("%m")
+        new_an = added_date.strftime("%Y")
+        return "{}/{}/{}".format(new_jour, new_mois, new_an)
+    jour1 = jour2 = jour3 = jour4 = jour5 = jour6 = jour7 = jour8 = jour9 = jour10 = jour11 = jour12 = jour13 = jour14 = jour15 = jour16 = jour17 = jour18 = jour19 = jour20 = jour21 = jour22 = jour23 = jour24 = jour25 = jour26 = jour27 = jour28 = 0
+    for i in range(370):
+        jour1 += db.session.query(Velages).filter(Velages.date == add_28("03/11/1990", i)).count()
+        jour2 += db.session.query(Velages).filter(Velages.date == add_28("04/11/1990", i)).count()
+        jour3 += db.session.query(Velages).filter(Velages.date == add_28("05/11/1990", i)).count()
+        jour4 += db.session.query(Velages).filter(Velages.date == add_28("06/11/1990", i)).count()
+        jour5 += db.session.query(Velages).filter(Velages.date == add_28("07/11/1990", i)).count()
+        jour6 += db.session.query(Velages).filter(Velages.date == add_28("08/11/1990", i)).count()
+        jour7 += db.session.query(Velages).filter(Velages.date == add_28("09/11/1990", i)).count()
+        jour8 += db.session.query(Velages).filter(Velages.date == add_28("10/11/1990", i)).count()
+        jour9 += db.session.query(Velages).filter(Velages.date == add_28("11/11/1990", i)).count()
+        jour10 += db.session.query(Velages).filter(Velages.date == add_28("12/11/1990", i)).count()
+        jour11 += db.session.query(Velages).filter(Velages.date == add_28("13/11/1990", i)).count()
+        jour12 += db.session.query(Velages).filter(Velages.date == add_28("14/11/1990", i)).count()
+        jour13 += db.session.query(Velages).filter(Velages.date == add_28("15/11/1990", i)).count()
+        jour14 += db.session.query(Velages).filter(Velages.date == add_28("16/11/1990", i)).count()
+        jour15 += db.session.query(Velages).filter(Velages.date == add_28("17/11/1990", i)).count()
+        jour16 += db.session.query(Velages).filter(Velages.date == add_28("18/11/1990", i)).count()
+        jour17 += db.session.query(Velages).filter(Velages.date == add_28("19/11/1990", i)).count()
+        jour18 += db.session.query(Velages).filter(Velages.date == add_28("20/11/1990", i)).count()
+        jour19 += db.session.query(Velages).filter(Velages.date == add_28("21/11/1990", i)).count()
+        jour20 += db.session.query(Velages).filter(Velages.date == add_28("22/11/1990", i)).count()
+        jour21 += db.session.query(Velages).filter(Velages.date == add_28("23/11/1990", i)).count()
+        jour22 += db.session.query(Velages).filter(Velages.date == add_28("24/11/1990", i)).count()
+        jour23 += db.session.query(Velages).filter(Velages.date == add_28("25/11/1990", i)).count()
+        jour24 += db.session.query(Velages).filter(Velages.date == add_28("26/11/1990", i)).count()
+        jour25 += db.session.query(Velages).filter(Velages.date == add_28("27/11/1990", i)).count()
+        jour26 += db.session.query(Velages).filter(Velages.date == add_28("28/11/1990", i)).count()
+        jour27 += db.session.query(Velages).filter(Velages.date == add_28("29/11/1990", i)).count()
+        jour28 += db.session.query(Velages).filter(Velages.date == add_28("30/11/1990", i)).count()
+    labels = ["J1", "J2", "J3", "J4", "J5", "J6", "J7", "J8", "J9", "J10", "J11", "J12", "J13", "J14", "J15", "J16", "J17", "J18", "J19", "J20", "J21", "J22", "J23", "J24", "J25", "J26", "J27", "J28"]
+    values = [jour1, jour2, jour3, jour4, jour5, jour6, jour7, jour8, jour9, jour10, jour11, jour12, jour13, jour14, jour15, jour16, jour17, jour18, jour19, jour20, jour21, jour22, jour23, jour24, jour25, jour26, jour27, jour28]
+    somme  = sum(values)
+    return render_template('question1.html', labels=labels, values=values, somme=somme)
 
-#Figure 2 //DISABLED
+#Figure 2
 @views.route('/q2')
 def q2():
     bar_labels=labels
@@ -98,7 +143,7 @@ def q6():
     bar_values=values
     return render_template('question6.html', labels=labels, values=values)
 
-#Figure 7 //DISABLED
+#Figure 7
 @views.route('/q7')
 def q7():
     bar_labels=labels
