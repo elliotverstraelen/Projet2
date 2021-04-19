@@ -2,6 +2,7 @@ from flask import Blueprint, render_template  # Permet de créer des routes vers
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.inspection import inspect
+from sqlalchemy.sql import text
 import os
 
 views = Blueprint('views', __name__)
@@ -22,8 +23,8 @@ Types = Base.classes.types
 Velages = Base.classes.velages
 
 # Mapping des relations entre 2 tables
-Animaux_velages = Animaux.velages_collection
-Velages_complications = Complications.velages_collection
+#Animaux_velages = Animaux.velages_collection
+#Velages_complications = Complications.velages_collection
 
 
 
@@ -121,13 +122,25 @@ def q3():
 #Figure 4
 @views.route('/q4')
 def q4():
-    bar_labels=labels
-    bar_values=values
     type1 = db.session.query(Animaux_types).filter(Animaux_types.type_id == 1).count()
     type2 = db.session.query(Animaux_types).filter(Animaux_types.type_id == 2).count()
     type3 = db.session.query(Animaux_types).filter(Animaux_types.type_id == 3).count()
     types_name = db.session.query(Types.type).all()
-    return render_template('question4.html', labels=labels, values=values, type1=type1, type2=type2, type3=type3)
+
+    import datetime
+
+    dates = {}
+    for i in range(13) :
+        dates[i] = 0
+    date_db = db.session.query(text('date')).from_statement(text('SELECT V.date FROM animaux A, velages V, animaux_velages AV where A.mort_ne = 1 AND AV.velage_id = V.id AND AV.animal_id = A.id')).all()
+    listdates = []
+    for day in date_db: 
+        listdates.append(datetime.datetime.strptime(repr(day), "('%d/%m/%Y',)"))
+    for day in listdates:
+        dates[day.timetuple().tm_mon] = dates[day.timetuple().tm_mon] + 1 
+    somme = db.session.query(Animaux).filter(Animaux.mort_ne == 1).count()
+    dates.pop(0)
+    return render_template('question4.html', labels=['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'], values=list(dates.values()), somme=somme,  type1=type1, type2=type2, type3=type3)
 
 #Figure 5
 @views.route('/q5')

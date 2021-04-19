@@ -6,25 +6,77 @@
 <h6>1. Y a-t-il un moment particulier durant l’année auquel plus de décès prématurés arrivent ?</h6>
 <h6>2. Y a-t-il une famille particulière chez qui cela arrive plus souvent ?</h6>
 <h6>3. Y a-t-il un père pour lequel cela arrive souvent ?</h6><br>
+
 <h3>4.1</h3>
 <h5>Représentation par tableau</h5>
-<table></table><br>
+<p>Nombre total de mort-nés au total en fonction du mois de Novembre 1990 à Novembre 2020</p>
+<table style="width:100%">
+    <thead>
+        <tr>
+            <th>Janvier</th>
+            <th>Février</th>
+            <th>Mars</th>
+            <th>Avril</th>
+            <th>Mai</th>
+            <th>Juin</th>
+            <th>Juillet</th>
+            <th>Août</th>
+            <th>Septembre</th>
+            <th>Octobre</th>
+            <th>Novembre</th>
+            <th>Décembre</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{values[0]}}</td>
+            <td>{{values[1]}}</td>
+            <td>{{values[2]}}</td>
+            <td>{{values[3]}}</td>
+            <td>{{values[4]}}</td>
+            <td>{{values[5]}}</td>
+            <td>{{values[6]}}</td>
+            <td>{{values[7]}}</td>
+            <td>{{values[8]}}</td>
+            <td>{{values[9]}}</td>
+            <td>{{values[10]}}</td>
+            <td>{{values[11]}}</td>
+            <td>{{ somme }}</td>
+        </tr>
+    </tbody>
+</table><br>
 <h5>Représentation graphique</h5>
 <!--(chart ou bar plot sur l’année)-->
 <canvas id="graphique4.1" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
+
+
+<!--
+
 <h3>4.2</h3>
 <h5>Représentation par tableau</h5>
 <table></table><br>
 <h5>Représentation graphique</h5>
+-->
+
 <!--(stacked bar plot qui affiche, famille par famille, le nombre de vivants, mort-nés, et décès prématurés, en choisissant une unité de temps adéquate.)-->
+<!--
 <canvas id="graphique4.2" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
+
 <h3>4.3</h3>
 <h5>Représentation par tableau</h5>
 <table></table><br>
 <h5>Représentation graphique</h5>
+-->
 <!--(stacked bar plot par père, affichant le nombre de vivants, mort-nés, et décès prématurés, en choisissant une unité de temps adéquate.)-->
+<!--
 <canvas id="graphique4.3" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
+
+
+-->
 <script>
+
+
 var ctx = document.getElementById('graphique4.1').getContext('2d');
 var chartData = {
     labels : [
@@ -33,7 +85,7 @@ var chartData = {
     {% endfor %}
     ],
     datasets : [{
-        label : "Assets",
+        label : "Morts-nés",
         fill : true,
         lineTension : 0.1,
         backgroundColor : "rgba(0, 100, 200, 0.5)",
@@ -58,6 +110,10 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+
+</script>
+
+<!--
 var ctx = document.getElementById('graphique4.2').getContext('2d');
 var chartData = {
     labels : [
@@ -125,6 +181,8 @@ var myChart = new Chart(ctx, {
     }
 });
 </script>
+
+-->
 
 
 <canvas id="graphique" width="200" height="50"></canvas>
