@@ -122,23 +122,18 @@ def q3():
 #Figure 4
 @views.route('/q4')
 def q4():
-    type1 = db.session.query(Animaux_types).filter(Animaux_types.type_id == 1).count()
-    type2 = db.session.query(Animaux_types).filter(Animaux_types.type_id == 2).count()
-    type3 = db.session.query(Animaux_types).filter(Animaux_types.type_id == 3).count()
-    types_name = db.session.query(Types.type).all()
-
     import datetime
 
     dates = {}
     for i in range(13) :
         dates[i] = 0
-    date_db = db.session.query(text('date')).from_statement(text('SELECT V.date FROM animaux A, velages V, animaux_velages AV where A.mort_ne = 1 AND AV.velage_id = V.id AND AV.animal_id = A.id')).all()
+    date_db = db.session.query(text('date')).from_statement(text('SELECT V.date FROM animaux A, velages V, animaux_velages AV where A.decede = 1 AND AV.velage_id = V.id AND AV.animal_id = A.id')).all()
     listdates = []
     for day in date_db: 
         listdates.append(datetime.datetime.strptime(repr(day), "('%d/%m/%Y',)"))
     for day in listdates:
         dates[day.timetuple().tm_mon] = dates[day.timetuple().tm_mon] + 1 
-    somme = db.session.query(Animaux).filter(Animaux.mort_ne == 1).count()
+    somme = db.session.query(Animaux).filter(Animaux.decede == 1).count()
     dates.pop(0)
     return render_template('question4.html', labels=['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'], values=list(dates.values()), somme=somme,  type1=type1, type2=type2, type3=type3)
 

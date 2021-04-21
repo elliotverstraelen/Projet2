@@ -9,7 +9,7 @@
 
 <h3>4.1</h3>
 <h5>Représentation par tableau</h5>
-<p>Nombre total de mort-nés au total en fonction du mois de Novembre 1990 à Novembre 2020</p>
+<p>Nombre total de décès prématurés par mois de Novembre 1990 à Novembre 2020</p>
 <table style="width:100%">
     <thead>
         <tr>
@@ -85,7 +85,7 @@ var chartData = {
     {% endfor %}
     ],
     datasets : [{
-        label : "Morts-nés",
+        label : "Décès prématurés",
         fill : true,
         lineTension : 0.1,
         backgroundColor : "rgba(0, 100, 200, 0.5)",
@@ -190,21 +190,22 @@ var myChart = new Chart(ctx, {
     // l'identifiant est celui du canevas
 	var ctx = document.getElementById('graphique').getContext('2d');
 	// création du graphique
-    var pourcentage_1 = {{ type1 }} / ({{type1}} + {{type2}} + {{type3}}); 
-    var pourcentage_2 = {{ type2 }} / ({{type1}} + {{type2}} + {{type3}}); 
-    var pourcentage_3 = {{ type3 }} / ({{type1}} + {{type2}} + {{type3}}); 
+    var pourcentage_1 = ({{values[11]}} + {{values[0]}} + {{values[1]}} )  / {{somme}}; 
+    var pourcentage_2 = ({{values[2]}} + {{values[3]}} + {{values[4]}} ) / {{somme}}; 
+    var pourcentage_3 = ({{values[5]}} + {{values[6]}} + {{values[7]}} ) / {{somme}}; 
+    var pourcentage_4 = ({{values[8]}} + {{values[9]}} + {{values[10]}} ) / {{somme}}; 
 	var myChart = new Chart(ctx, {
     type: 'pie',   // le type du graphique
 	data: {        // les données
-        labels: ['Holstein', 'Blanc Bleu Belge', 'Jersey'],
+        labels: ['Hiver', 'Printemps', 'Été', 'Automne'],
         datasets: [{ 
                     label: 'votes',
-                    data: [pourcentage_1, pourcentage_2, pourcentage_3],
-                    backgroundColor: ["rgb(54, 162, 235)","rgb(255, 205, 86)", "rgb(255, 99, 132)"]
+                    data: [pourcentage_1, pourcentage_2, pourcentage_3, pourcentage_4],
+                    backgroundColor: ["rgb(54, 162, 235)","rgb(255, 205, 86)", "rgb(255, 99, 132)", "rgb(255,69,0)"]
                    }]
 	       }
          }
 	);
       </script> 
-<center><h3>pourcentage des types d'animaux</h3></center>   
+<center><h3>pourcentage des décès prématurés par saison</h3></center>   
 {% endblock %} 
