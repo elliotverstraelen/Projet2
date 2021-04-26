@@ -32,11 +32,14 @@ Animaux_velages = Animaux.velages_collection
 
 # ROUTES & DATA
 
+# Listes vide pour que les figures non modifiés continuent de fonctionner
+labels = []
+values = []
 
 #Routes
 @views.route('/') # Il s'agit de ce qu'il y a dans l'URL, '/' veut dire pas de prefixe
 def home():       #On ira donc sur la page 'home' lorsqu'il y'a '/' dans l'URL
-    return render_template("home.html", labels=labels, values=values)
+    return render_template("home.html")
 
 #Figure 1
 @views.route('/q1')
@@ -118,7 +121,7 @@ def q4():
         dates[day.timetuple().tm_mon] = dates[day.timetuple().tm_mon] + 1 
     somme = db.session.query(Animaux).filter(Animaux.decede == 1).count()
     dates.pop(0)
-    return render_template('question4.html', labels=['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'], values=list(dates.values()), somme=somme,  type1=type1, type2=type2, type3=type3)
+    return render_template('question4.html', labels=['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'], values=list(dates.values()), somme=somme)
 
 #Figure 5
 @views.route('/q5')
