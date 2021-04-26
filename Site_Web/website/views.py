@@ -23,29 +23,14 @@ Types = Base.classes.types
 Velages = Base.classes.velages
 
 # Mapping des relations entre 2 tables
-#Animaux_velages = Animaux.velages_collection
+Animaux_velages = Animaux.velages_collection
 #Velages_complications = Complications.velages_collection
 
 
 
 
 
-# DATA
-# Importation des données SQL directement ici et les envoyer pour chaque page ?
-labels = [
-    'JAN', 'FEB', 'MAR', 'APR',
-    'MAY', 'JUN', 'JUL', 'AUG',
-    'SEP', 'OCT', 'NOV', 'DEC'
-]
-
-values = [
-    967.67, 1190.89, 1079.75, 1349.19,
-    2328.91, 2504.28, 2873.83, 4764.87,
-    4349.29, 6458.30, 9907, 16297
-]
-
-
-
+# ROUTES & DATA
 
 
 #Routes
@@ -56,8 +41,6 @@ def home():       #On ira donc sur la page 'home' lorsqu'il y'a '/' dans l'URL
 #Figure 1
 @views.route('/q1')
 def q1():
-    #bar_labels=labels
-    #bar_values=values
     import datetime
     def add_28(date, j):
         jour = int(date[0:2])
