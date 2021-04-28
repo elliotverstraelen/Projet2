@@ -23,7 +23,7 @@ var chartData = {
     {% endfor %}
     ],
     datasets : [{
-        label : "Assets",
+        label : "Nombre de velâges",
         fill : true,
         lineTension : 0.1,
         backgroundColor : "rgba(0, 100, 200, 0.5)",
@@ -42,7 +42,11 @@ var myChart = new Chart(ctx, {
     data: chartData,
     options: {
         scales: {
+            x: {
+                stacked: true
+            },
             y: {
+                stacked: true,
                 beginAtZero: true
             }
         }
