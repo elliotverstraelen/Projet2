@@ -2,6 +2,7 @@ from flask import Blueprint, render_template  # Permet de créer des routes vers
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.inspection import inspect
+from sqlalchemy import extract
 from sqlalchemy.sql import text
 import os
 
@@ -101,9 +102,25 @@ def q2():
 #Figure 3
 @views.route('/q3')
 def q3():
-    bar_labels=labels
-    bar_values=values
-    return render_template('question3.html', labels=labels, values=values)
+    #3.1
+    import datetime
+    
+    dates = {}
+    for i in range(13) :
+        dates[i] = 0
+    date_db = db.session.query(text('date')).from_statement(text('SELECT V.date FROM animaux A, velages V, animaux_velages AV where A.mort_ne = 1 AND AV.velage_id = V.id AND AV.animal_id = A.id')).all()
+    listdates = []
+    for day in date_db: 
+        listdates.append(datetime.datetime.strptime(repr(day), "('%d/%m/%Y',)"))
+    for day in listdates:
+        dates[day.timetuple().tm_mon] = dates[day.timetuple().tm_mon] + 1 
+    somme = db.session.query(Animaux).filter(Animaux.decede == 1).count()
+    dates.pop(0)
+
+    #3.2
+    animaux_db = db.engine.execute(text("SELECT COUNT(famille_id) FROM familles F, animaux A WHERE A.mort_ne = 1 AND  F.id = A.famille_id"))
+
+    return render_template('question3.html', labels=['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'], values=list(dates.values()))
 
 #Figure 4
 @views.route('/q4')

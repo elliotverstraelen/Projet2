@@ -8,19 +8,53 @@
 <button type="button" class="collapsible">3.1 - Y a-t-il un moment particulier durant l’année auquel plus de décès arrivent ?</button>
 <div class="content">
     <h5>Représentation par tableau</h5>
-    <table></table><br>
+    <table style="width:100%">
+        <thead>
+            <tr>
+                <th>Janvier</th>
+                <th>Février</th>
+                <th>Mars</th>
+                <th>Avril</th>
+                <th>Mai</th>
+                <th>Juin</th>
+                <th>Juillet</th>
+                <th>Août</th>
+                <th>Septembre</th>
+                <th>Octobre</th>
+                <th>Novembre</th>
+                <th>Décembre</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{values[0]}}</td>
+                <td>{{values[1]}}</td>
+                <td>{{values[2]}}</td>
+                <td>{{values[3]}}</td>
+                <td>{{values[4]}}</td>
+                <td>{{values[5]}}</td>
+                <td>{{values[6]}}</td>
+                <td>{{values[7]}}</td>
+                <td>{{values[8]}}</td>
+                <td>{{values[9]}}</td>
+                <td>{{values[10]}}</td>
+                <td>{{values[11]}}</td>
+                <td>{{values[12]}}</td>
+            </tr>
+        </tbody>
+    </table><br>
     <h5>Représentation graphique</h5>
     <canvas id="graphique3.1" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
 </div>
 
 <button type="button" class="collapsible">3.2 - Y a-t-il une famille particulière chez qui cela arrive plus souvent ?</button>
 <div class="content">
-    <h3>3.2</h3>
-<h5>Représentation par tableau</h5>
-<table></table><br>
-<h5>Représentation graphique</h5>
-<!--(stacked bar plot qui affiche, famille par famille, le nombre de vivants, mort-nés, et décès prématurés, en choisissant une unité de temps adéquate.)-->
-<canvas id="graphique3.2" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
+    <h5>Représentation par tableau</h5>
+    <table></table><br>
+    <h5>Représentation graphique</h5>
+    <!--(stacked bar plot qui affiche, famille par famille, le nombre de vivants, mort-nés, et décès prématurés, en choisissant une unité de temps adéquate.)-->
+    <canvas id="graphique3.2" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
 </div>
 
 <button type="button" class="collapsible">3.3 - Y a-t-il un père pour lequel cela arrive souvent </button>
