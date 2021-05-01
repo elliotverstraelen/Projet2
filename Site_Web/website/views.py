@@ -94,9 +94,48 @@ def q1():
 #Figure 2
 @views.route('/q2')
 def q2():
-    bar_labels=labels
-    bar_values=values
-    return render_template('question2.html', labels=labels, values=values)
+
+    # variable de bd dans laquelle sont stockées tous les velages dont c'est le PREMIER pour la mere
+    # (mere_id n'est pas encore passée)
+    # Avec le reste des infos comme par exemple la date, car après je dois filtrer par année
+    velages_1 = db.session.query(text('id')).from_statement(text('SELECT V.id FROM velages V')).all()
+
+    # variable de bd dans laquelle sont stockées tous les velages dont c'est le SECOND pour la mere
+    # (mere_id n'est pas encore passée)
+    # Avec le reste des infos comme par exemple la date, car après je dois filtrer par année
+    velages_2 = ...
+
+    # variable de bd dans laquelle sont stockées tous les velages dont c'est le TROISIÈME pour la mere
+    # (mere_id n'est pas encore passée)
+    # Avec le reste des infos comme par exemple la date, car après je dois filtrer par année
+    velages_3 = ...
+
+    # ETC.
+    velages_4 = []
+    velages_5 = []
+    velages_6 = []
+    velages_7 = []
+    velages_8 = []
+    velages_9 = []
+    velages_10 = []
+
+    bar_values = {}
+
+    for i in range(31):
+        bar_values[i] = [velages_1, velages_2, velages_3, velages_4, velages_5, velages_6, velages_7, velages_8,
+                         velages_9, velages_10]
+
+    date_db = db.session.query(text('date')).from_statement(text('SELECT V.date FROM velages V')).all()
+
+    bar_labels = ["1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998",
+                  "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007",
+                  "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016",
+                  "2017", "2018", "2019", "2020"]
+
+    return render_template('question2.html', labels=bar_labels, values=bar_values)
+
+
+
 
 #Figure 3
 @views.route('/q3')
@@ -111,14 +150,14 @@ def q4():
     import datetime
 
     dates = {}
-    for i in range(13) :
+    for i in range(13):
         dates[i] = 0
     date_db = db.session.query(text('date')).from_statement(text('SELECT V.date FROM animaux A, velages V, animaux_velages AV where A.decede = 1 AND AV.velage_id = V.id AND AV.animal_id = A.id')).all()
     listdates = []
     for day in date_db: 
         listdates.append(datetime.datetime.strptime(repr(day), "('%d/%m/%Y',)"))
     for day in listdates:
-        dates[day.timetuple().tm_mon] = dates[day.timetuple().tm_mon] + 1 
+        dates[day.timetuple().tm_mon] = dates[day.timetuple().tm_mon] + 1
     somme = db.session.query(Animaux).filter(Animaux.decede == 1).count()
     dates.pop(0)
     return render_template('question4.html', labels=['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'], values=list(dates.values()), somme=somme)

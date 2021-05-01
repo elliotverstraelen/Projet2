@@ -2,8 +2,10 @@
 {% block title %}Question 1{% endblock %}
 {% block content %}
 <h1>Les données</h1>
-<h5>Une croyance populaire chez certains éleveurs est que les naissances arrivent plus souvent à la pleine lune.<br>Est-ce vrai ou pas ?</h5><br>
-
+<h5>Une croyance populaire chez certains éleveurs est que les naissances arrivent plus souvent à la pleine lune.<br>Est-ce vrai ou pas ?</h5>
+<p>Il nous faut créer un graphique du pourcentage de vêlages sur 28 jours (durée du cycle lunaire).<br>
+    Afin d'avoir des données objectives sur le sujet, on va analyser les vêlages sur les 30 dernières années de Novembre 1990 à Novembre 2020 ou plus exactement les 370 cycles lunaires à partir du lendemain de la pleine lune du 02/11/1990.<br>
+    Le jour 1 correspond donc au lendemain de la pleine lune et le jour 28 à la pleine lune.</p>
 <h3>Représentation par tableau</h3>
 <p>Nombre total de vêlages par jour du cycle lunaire de la pleine lune du 02 Novembre 1990 à Novembre 2020 (370 cycles lunaires au total)</p>
 <table style="width:100%">
@@ -74,12 +76,12 @@
         </tr>
     </tbody>
 </table><br>
-<h3>Représentation graphique</h3>
-<!--(Produire une heat map ou bar chart sur 28 jours avec le % de vêlage.)-->
-<p>Bar chart du pourcentage de vêlages par jour du cycle lunaire<br>J28 = pleine lune</p>
+<h3>Représentation graphique</h3><br>
+<h5 style="text-align:center">Bar chart du pourcentage de vêlages par jour du cycle lunaire</h5>
 <canvas id="graphique1" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
-<p>Comme on peut le constater, on ne peut pas voir d'augmentation significative du pourcentage de naissances le jour de la pleine lune.<br>On peut cependant noter que le 18ème jour du cycle lunaire enregistre un pourcentage généralement plus élevé de naissances tandis que le 22ème jours enregistre un pourcentage légèrement plus bas</p><br><br>
-
+<p>Maintenant que nous disposons de données suffisantes pour répondre à la question, on peut constater que la réponse est <b>non</b>.<br>
+    En effet, le pourcentage de naissances n'est pas significativement plus élevé le jour de la pleine lune par rapport aux autres jours du cycle lunaire.<br>
+    On peut cependant noter que le 18ème jour du cycle lunaire enregistre un pourcentage généralement plus élevé de naissances tandis que le 22ème jour enregistre un pourcentage légèrement plus bas</p><br><br>
 
 
 <script>
