@@ -2,36 +2,124 @@
 {% block title %}Question 7{% endblock %}
 {% block content %}
 <h1>Les données</h1>
-<h5>Le vendeur de dose d’insémination nous propose de racheter des doses d’un taureau ou d’un enfant d’un taureau que nous avons déjà eu. Nous pouvons utiliser les données des veaux déjà nés pour évaluer le taureau au sein de notre ferme.</h5>
+<h5>Le vendeur de dose d’insémination nous propose de racheter des doses d’un taureau ou d’un enfant 
+    d’un taureau que nous avons déjà eu. Nous pouvons utiliser les données des veaux déjà nés pour évaluer le taureau au sein de notre ferme.</h5>
 <h6>1. Quel fut son utilisation ?</h6>
 <h6>2. Quelles sont ses statistiques ?</h6>
 <h6>3. Combien de descendantes avons-nous encore (filles, petites filles, arrière petites filles, stack bar chart par taureau) ?</h6><br>
 
 <h3>7.1</h3>
 <h5>Représentation par tableau</h5>
-<table></table><br>
+<p>Choisissez le taureau dont vous voulez observez le nombre de descendants: 
+    <form action="{{ url_for('views.q7')}}"> 
+        <div>
+            <SELECT name="pere" method="POST">
+                {% for pere in father_list %}
+            <OPTION value="{{pere[0]}}">{{pere}}</OPTION>
+                {% endfor %}
+        </SELECT>
+        </div>
+    </form>
+</p>
+<table style="width:100%">
+    <thead>
+        <tr>
+            <th>Générations</th>
+            <th>Janvier</th>
+            <th>Février</th>
+            <th>Mars</th>
+            <th>Avril</th>
+            <th>Mai</th>
+            <th>Juin</th>
+            <th>Juillet</th>
+            <th>Août</th>
+            <th>Septembre</th>
+            <th>Octobre</th>
+            <th>Novembre</th>
+            <th>Décembre</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1er Génération</td>
+            <td>{{value1[0]}}</td>
+            <td>{{value1[1]}}</td>
+            <td>{{value1[2]}}</td>
+            <td>{{value1[3]}}</td>
+            <td>{{value1[4]}}</td>
+            <td>{{value1[5]}}</td>
+            <td>{{value1[6]}}</td>
+            <td>{{value1[7]}}</td>
+            <td>{{value1[8]}}</td>
+            <td>{{value1[9]}}</td>
+            <td>{{value1[10]}}</td>
+            <td>{{value1[11]}}</td>
+            <td>{{ somme1 }}</td>
+        </tr>
+        <tr>
+            <td>2ème Génération</td>
+            <td>{{value2[0]}}</td>
+            <td>{{value2[1]}}</td>
+            <td>{{value2[2]}}</td>
+            <td>{{value2[3]}}</td>
+            <td>{{value2[4]}}</td>
+            <td>{{value2[5]}}</td>
+            <td>{{value2[6]}}</td>
+            <td>{{value2[7]}}</td>
+            <td>{{value2[8]}}</td>
+            <td>{{value2[9]}}</td>
+            <td>{{value2[10]}}</td>
+            <td>{{value2[11]}}</td>
+            <td>{{ somme2 }}</td>
+        </tr>
+        <tr>
+            <td>3ème Génération</td>
+            <td>{{value3[0]}}</td>
+            <td>{{value3[1]}}</td>
+            <td>{{value3[2]}}</td>
+            <td>{{value3[3]}}</td>
+            <td>{{value3[4]}}</td>
+            <td>{{value3[5]}}</td>
+            <td>{{value3[6]}}</td>
+            <td>{{value3[7]}}</td>
+            <td>{{value3[8]}}</td>
+            <td>{{value3[9]}}</td>
+            <td>{{value3[10]}}</td>
+            <td>{{value3[11]}}</td>
+            <td>{{ somme3 }}</td>
+        </tr>
+    </tbody>
+</table><br>
 <h5>Représentation graphique</h5>
 <!--(graphe par mois du nombre de veau né de ce taureau, veau de 2ème génération, de 3ème génération)-->
 <canvas id="graphique7.1" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
 
-<h3>7.2</h3>
+<!--<h3>7.2</h3>
 <h5>Représentation par tableau</h5>
 <table></table><br>
 <h5>Représentation graphique</h5>
-<!--(% femelle, % jumaux, % mort né/DCD, % problèmes, …)-->
+   (% femelle, % jumaux, % mort né/DCD, % problèmes, …)
 <canvas id="graphique7.2" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
 
 <h3>7.3</h3>
 <h5>Représentation par tableau</h5>
 <table></table><br>
-<h5>Représentation graphique</h5>
-<!--(stack bar chart par taureau)-->
+<h5>Représentation graphique</h5>-->
+
+
+
+<!--(stack bar chart par taureau)
 <canvas id="graphique7.3" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
+-->
+
 
 
 
 
 <script>
+
+
 var ctx = document.getElementById('graphique7.1').getContext('2d');
 var chartData = {
     labels : [
@@ -40,14 +128,40 @@ var chartData = {
     {% endfor %}
     ],
     datasets : [{
-        label : "Assets",
-        fill : true,
+        label : "1er generation",
+        fill : false,
         lineTension : 0.1,
         backgroundColor : "rgba(0, 100, 200, 0.5)",
         borderColor : "rgba(0, 100, 200, 1)",
         borderWidth: 1,
         data : [
-        {% for item in values %}
+        {% for item in value1 %}
+        "{{ item }}",
+        {% endfor %}
+        ],
+        spanGaps : false
+    }, {
+        label : "2eme generation",
+        fill : false,
+        lineTension : 0.1,
+        backgroundColor : "green",
+        borderColor : "green",
+        borderWidth: 1,
+        data : [
+        {% for item in value2 %}
+        "{{ item }}",
+        {% endfor %}
+        ],
+        spanGaps : false
+    }, {
+        label : "3eme generation",
+        fill : false,
+        lineTension : 0.1,
+        backgroundColor : "red",
+        borderColor : "red",
+        borderWidth: 1,
+        data : [
+        {% for item in value3 %}
         "{{ item }}",
         {% endfor %}
         ],
@@ -66,7 +180,9 @@ var myChart = new Chart(ctx, {
     }
 });
 
-var ctx = document.getElementById('graphique7.2').getContext('2d');
+</script>
+
+<!--var ctx = document.getElementById('graphique7.2').getContext('2d');
 var chartData = {
     labels : [
     {% for item in labels %}
@@ -123,7 +239,7 @@ var chartData = {
     }]
 };
 var myChart = new Chart(ctx, {
-    type: 'bar',
+    type: 'line',
     data: chartData,
     options: {
         scales: {
@@ -132,6 +248,6 @@ var myChart = new Chart(ctx, {
             }
         }
     }
-});
+});-->
 </script>
 {% endblock %}

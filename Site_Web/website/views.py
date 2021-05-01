@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template  # Permet de créer des routes vers les fichiers
+from flask import Blueprint, render_template, request  # Permet de créer des routes vers les fichiers
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.inspection import inspect
@@ -140,9 +140,68 @@ def q6():
 #Figure 7
 @views.route('/q7')
 def q7():
-    bar_labels=labels
-    bar_values=values
-    return render_template('question7.html', labels=labels, values=values)
+    import datetime
+
+    father_list_tupl = db.session.query(text('pere_id')).from_statement(text('SELECT V.pere_id FROM velages V')).all()
+    father_list = [father_list_tupl[0][0]]
+    for i in range(1, len(father_list_tupl)):
+        if father_list_tupl[i][0] not in father_list:
+            father_list.append(father_list_tupl[i][0])
+
+    
+
+    dates_gen1 = {}
+    dates_gen2 = {}
+    dates_gen3 = {}
+    for i in range(13):
+        dates_gen1[i] = 0
+        dates_gen2[i] = 0
+        dates_gen3[i] = 0
+
+    date_db = db.session.query(text('date')).from_statement(text('SELECT V.date FROM velages V WHERE V.pere_id = 5005')).all()
+
+    list_dates_tot = []
+
+    for day in date_db:
+        list_dates_tot.append(datetime.datetime.strptime(repr(day), "('%d/%m/%Y',)"))  #represente la date sous le format dd/mm/yy
+    
+
+    year_first_gen = list_dates_tot[0].timetuple().tm_year
+    list_date1 = []
+    list_date2 = []
+    list_date3 = []
+    for year in list_dates_tot:
+        if year.timetuple().tm_year == year_first_gen:
+            list_date1.append(year)
+        elif year.timetuple().tm_year == year_first_gen + 1:
+            list_date2.append(year)
+        elif year.timetuple().tm_year == year_first_gen + 2:
+            list_date3.append(year)
+
+    for day in list_date1:
+        dates_gen1[day.timetuple().tm_mon] = dates_gen1[day.timetuple().tm_mon] + 1
+
+    for day in list_date2:
+        dates_gen2[day.timetuple().tm_mon] = dates_gen2[day.timetuple().tm_mon] + 1
+    
+    for day in list_date3:
+        dates_gen3[day.timetuple().tm_mon] = dates_gen2[day.timetuple().tm_mon] + 1
+
+    dates_gen1.pop(0)
+    dates_gen2.pop(0)
+    dates_gen3.pop(0)
+
+    
+
+    value1 = list(dates_gen1.values())
+    value2 = list(dates_gen2.values())
+    value3 = list(dates_gen3.values())
+
+    somme1 = sum(value1)
+    somme2 = sum(value2)
+    somme3 = sum(value3)
+    labels = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+    return render_template('question7.html', labels=labels, values=values, value1=value1, value2=value2, value3=value3, father_list=father_list, somme1=somme1, somme2=somme2, somme3=somme3)
 
 #add data
 @views.route('/add_data')
