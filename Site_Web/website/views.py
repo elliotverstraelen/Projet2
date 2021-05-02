@@ -168,7 +168,7 @@ def q2():
             v9.append(vl_meres[i])
             d9.append(vl_dates[i])
             continue
-
+    """
     print("v1 :", v1)
     print("len(v1) :", len(v1))
     print("d1 :", d1)
@@ -184,9 +184,9 @@ def q2():
     print("len(v7) :", len(v7))
     print("len(v8) :", len(v8))
     print("len(v9) :", len(v9))
-
+    """
     somme = len(v1) + len(v2) + len(v3) + len(v4) + len(v5) + len(v6) + len(v7) + len(v8) + len(v9)
-    print("nombre velages comptabilisés dans les listes :", somme)
+    #print("nombre velages comptabilisés dans les listes :", somme)
 
     premiersVelages = []
     deuxiemesVelages = []
@@ -213,11 +213,11 @@ def q2():
             premiersVelages.append(nbr)
             nbr = 1
             annee = d1[i]
-
+    """
     print("premiersVelages :", premiersVelages)
     print("sum(premiersVelages) :", sum(premiersVelages))
     print(len(premiersVelages))
-
+    """
     nbr = 0
     annee = d2[0]
     for i in range(len(d2)):
@@ -233,11 +233,11 @@ def q2():
             deuxiemesVelages.append(nbr)
             nbr = 1
             annee = d2[i]
-
+    """
     print("deuxiemesVelages :", deuxiemesVelages)
     print("sum(deuxiemesVelages) :", sum(deuxiemesVelages))
     print(len(deuxiemesVelages))
-
+    """
     nbr = 0
     annee = d3[0]
     for i in range(len(d3)):
@@ -253,11 +253,11 @@ def q2():
             troisiemesVelages.append(nbr)
             nbr = 1
             annee = d3[i]
-
+    """
     print("troisiemesVelages :", troisiemesVelages)
     print("sum(troisiemesVelages) :", sum(troisiemesVelages))
     print(len(troisiemesVelages))
-
+    """
     nbr = 0
     annee = d4[0]
     for i in range(len(d4)):
@@ -273,10 +273,11 @@ def q2():
             quatriemesVelages.append(nbr)
             nbr = 1
             annee = d4[i]
+    """        
     print("quatriemesVelages :", quatriemesVelages)
     print("sum(quatriemesVelages) :", sum(quatriemesVelages))
     print(len(quatriemesVelages))
-
+    """
     nbr = 0
     annee = d5[0]
     for i in range(len(d5)):
@@ -292,11 +293,11 @@ def q2():
             cinquiemesVelages.append(nbr)
             nbr = 1
             annee = d5[i]
-
+    """
     print("cinquiemesVelages :", cinquiemesVelages)
     print("sum(cinquiemesVelages) :", sum(cinquiemesVelages))
     print(len(cinquiemesVelages))
-
+    """
     nbr = 0
     annee = d6[0]
     for i in range(len(d2)):
@@ -314,11 +315,11 @@ def q2():
             sixiemesVelages.append(nbr)
             nbr = 1
             annee = d6[i]
-
+    """
     print("sixiemesVelages :", sixiemesVelages)
     print("sum(sixiemesVelages) :", sum(sixiemesVelages))
     print(len(sixiemesVelages))
-
+    """
     nbr = 0
     annee = d7[0]
     for i in range(len(d2)):
@@ -336,11 +337,11 @@ def q2():
             septiemesVelages.append(nbr)
             nbr = 1
             annee = d7[i]
-
+    """
     print("septiemesVelages :", septiemesVelages)
     print("sum(septiemesVelages) :", sum(septiemesVelages))
     print(len(septiemesVelages))
-
+    """
     nbr = 0
     annee = d8[0]
     for i in range(len(d2)):
@@ -358,11 +359,11 @@ def q2():
             huitiemesVelages.append(nbr)
             nbr = 1
             annee = d8[i]
-
+    """
     print("huitiemesVelages :", huitiemesVelages)
     print("sum(huitiemesVelages) :", sum(huitiemesVelages))
     print(len(huitiemesVelages))
-
+    """
     nbr = 0
     annee = d9[0]
     for i in range(len(d2)):
@@ -380,11 +381,11 @@ def q2():
             neuviemesVelages.append(nbr)
             nbr = 1
             annee = d9[i]
-
+    """
     print("neuviemesVelages :", neuviemesVelages)
     print("sum(neuviemesVelages) :", sum(neuviemesVelages))
     print(len(neuviemesVelages))
-
+    """
     bar_values = [premiersVelages, deuxiemesVelages, troisiemesVelages, quatriemesVelages, cinquiemesVelages,
                   sixiemesVelages, septiemesVelages, huitiemesVelages, neuviemesVelages]
 
