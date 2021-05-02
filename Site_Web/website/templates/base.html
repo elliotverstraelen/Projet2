@@ -25,10 +25,12 @@
     <body>
         <div class="navbar-exapand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">La Ferme Des 3 Chênes</a>
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="/">
+                    <img src="{{ url_for('static', filename='favicon.svg')}}" height="28">
+                </a>
+                <nav class="navbar navbar-expand-md navbar-light bg-light">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <ul class="navbar-nav me-auto">
                             <li class ="nav-item">
                                 <a class="nav-link" href="q1">Q1</a>
                             </li>
@@ -50,12 +52,8 @@
                             <li class ="nav-item">
                                 <a class="nav-link" href="q7">Q7</a>
                             </li>
-                            <ul class="secondary-nav d-flex">
-                               <button class="btn btn-outline-success" type="button"><a href="add_data.html">Ajouter une donnée</a></button>
-                            </ul>
                         </ul>
                     </div>  
-                </nav>
             </div>
         </div>
         <div class ="main">
@@ -64,7 +62,19 @@
                 {% endblock %}
             </div>
         </div>
+        <section class="footer3 cid-swfLtEC6c0" once="footers" id="footer3-p">
+
+            <div class="container">
+                <div class="media-container-row align-center mbr-white">
+                    <div class="row row-copirayt">
+                        <p class="mbr-text mb-0 mbr-fonts-style mbr-white align-center display-7">
+                            © 2021 UCLouvain - SINF</p>
+                    </div>
+                </div>
+            </div>
+        </section>  
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
     </body>
 </html>

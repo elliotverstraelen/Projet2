@@ -2,9 +2,9 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 <section class="hero">
-    <div class="container">
+    <div class="container jumbotron">
         <div class="left-col">
-            <p class="subhead">La ferme des 3 Chênes</p>
+            <p class="subhead display-3">La ferme des 3 Chênes</p>
             <h1>Une ferme proche de ses vaches</h1>
         </div>
         <img src="{{ url_for('static', filename='vaches.jpg')}}" class="hero-img" width="200" height="350" alt="Une vache de la ferme">
@@ -18,27 +18,65 @@
     </div>
 </section>
 
-<section class="contact-section">
+<section class="funfacts">
     <div class="container">
-        <div class="contact-left">
-            <h3>Contact</h3>
-            <form action="">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="Votre nom" size="50"><br>
-                <br>
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" size="50"><br>
-                <br>
-                <label for="message">Message</label>
-                <textarea name="message" id="message" cols="30" rows="10" placeholder="Entrez votre message" size="50"></textarea><br>
-                <br>
-                <input type="submit" class="send-message-cta" value="Envoyer le message" size="50">
-            </form>
+        <div class="row justify-content-center">
+            <div class="title col-12 col-md-9">
+                <h3 class="mbr-section-title mbr-fonts-style align-center mb-4 display-2"><strong>Fun Facts</strong></strong></h3>
+                <p>
+                    Cows are referred to as the foster mothers of the human race because they produce most of the milk that people drink.
+                    The first cow in America arrived in Jamestown colony in 1611. Until the 1850's, nearly every family had its own cow. 
+                    Dairying has improved through the years. Today, one cow can produce the milk that it once took 10 cows to produce.
+                    Cows are milked for an average of 3-4 years. A cow must have a calf in order to produce milk. Calves are fed milk until they are 8-9 weeks old.
+                    The average cow is 2 years old when she has her first calf.
+                    Calves are fed milk until they are 8-9 weeks old.
+                    A young female cow is called a heifer.
+                    Before milking machines were invented in 1894, farmers could only milk about 6 cows per hour. Today, farmers use machines to milk more than 100 cows per hour.
+                    Cows are ruminants, which are cud chewing mammals. Sheep and camels also are ruminants.
+                    A cow chews her cud (regurgitated, partially digested food) for up to 8 hours each day.
+                    Dairy cows provide 90% of the world's milk supply.
+                </p>
+    </div>
+</section>
+<section class="image">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="title col-12 col-md-9">
+                <div class="image-wrapper text-center">
+                    <img src="{{ url_for('static', filename='vache2.jpg')}}" class="hero-img" width="200" height="350" alt="Meuuuh">
+                </div>
+            </div>
         </div>
-        <div class="contact-map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19982.286827397347!2d5.737233232085944!3d49.880466989612856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c01df436e95bc9%3A0xd6def8515e714d03!2sLa%20Ferme%20des%202%20Fontaines!5e0!3m2!1sfr!2slu!4v1617271656448!5m2!1sfr!2slu" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+</section>
+<section class="funfacts2">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="title col-12 col-md-9">
+                <h3 class="mbr-section-title mbr-fonts-style align-center mb-4 display-2"><strong>More Facts</strong></strong></h3>
+                <p>
+                    Contrary to popular belief, cows do not have 4 stomachs; they have 4 digestive compartments:
+                    1. The rumen holds up to 50 gallons of partially digested food. This is where cud comes from. Good bacteria in the rumen helps digest the cows food and provides protein for the cow.
+                    2. The reticulum is called the hardware stomach because if cows accidentally eat hardware (like a piece of fencing scrap), it will often lodge here causing no further damage.
+                    3. The omasum is sort of like a filter.
+                    4. The abomasum which is like our stomach.
+                    Cows drink about a bathtub full of water and eat around 40 pounds of food a day.
+                    Cows have 32 teeth:
+                    8 incisors on the bottom front
+                    6 molars on the top and bottom of each side
+                    A tough pad of skin instead of teeth on the top front
+                    Holsteins are black and white, and each has a unique pattern.
+                    A Holstein calf weighs 80-110 lbs. at birth.
+                    A mature Holstein cow weighs 1,300-1,500 lbs.
+                    Jerseys vary from dark brown or fawn, and sometimes are splashed with white.
+                    A Jersey calf weighs around 60 lbs. at birth.
+                    A mature Jersey cow weighs 900-1,000 lbs.
+                    The average body temperature of a cow is 101.5°F.
+                    Water buffalo, camels, goats, sheep, horses, and reindeer are also milked.
+                </p>
+                <p class="font-italic">source: https://beef2live.com/story-fun-facts-cows-calves-104-104000#:~:text=A%20cow%20must%20have%20a,are%208%2D9%20weeks%20old.</p>
+            </div>
         </div>
-
     </div>
 </section>
 {% endblock %}
