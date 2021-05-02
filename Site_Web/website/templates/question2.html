@@ -36,7 +36,7 @@ var chartData = {
         ],
         spanGaps : false
     }, {
-        label : "Nombre de second velâges",
+        label : "Nombre de 2emes velâges",
         fill : true,
         lineTension : 0.1,
         backgroundColor : "rgba(100, 0, 200, 0.5)",
@@ -48,6 +48,97 @@ var chartData = {
         {% endfor %}
         ],
         spanGaps : false
+    }, {
+        label : "Nombre de 3emes velâges",
+        fill : true,
+        lineTension : 0.1,
+        backgroundColor : "rgba(0, 0, 200, 0.5)",
+        borderColor : "rgba(0, 0, 200, 1)",
+        borderWidth: 1,
+        data : [
+        {% for item in values[2] %}
+        "{{ item }}",
+        {% endfor %}
+        ],
+        spanGaps : false
+    }, {
+        label : "Nombre de 4emes velâges",
+        fill : true,
+        lineTension : 0.1,
+        backgroundColor : "rgba(100, 0, 0, 0.5)",
+        borderColor : "rgba(100, 0, 0, 1)",
+        borderWidth: 1,
+        data : [
+        {% for item in values[3] %}
+        "{{ item }}",
+        {% endfor %}
+        ],
+        spanGaps : false
+    }, {
+        label : "Nombre de 5emes velâges",
+        fill : true,
+        lineTension : 0.1,
+        backgroundColor : "rgba(100, 200, 200, 0.5)",
+        borderColor : "rgba(100, 200, 200, 1)",
+        borderWidth: 1,
+        data : [
+        {% for item in values[4] %}
+        "{{ item }}",
+        {% endfor %}
+        ],
+        spanGaps : false
+    }, {
+        label : "Nombre de 6emes velâges",
+        fill : true,
+        lineTension : 0.1,
+        backgroundColor : "rgba(100, 0, 0, 0.5)",
+        borderColor : "rgba(100, 0, 0, 1)",
+        borderWidth: 1,
+        data : [
+        {% for item in values[5] %}
+        "{{ item }}",
+        {% endfor %}
+        ],
+        spanGaps : false
+    }, {
+        label : "Nombre de 7emes velâges",
+        fill : true,
+        lineTension : 0.1,
+        backgroundColor : "rgba(200, 2000, 0, 0.5)",
+        borderColor : "rgba(200, 200, 0, 1)",
+        borderWidth: 1,
+        data : [
+        {% for item in values[6] %}
+        "{{ item }}",
+        {% endfor %}
+        ],
+        spanGaps : false
+    }, {
+        label : "Nombre de 8emes velâges",
+        fill : true,
+        lineTension : 0.1,
+        backgroundColor : "rgba(0, 0, 50, 0.5)",
+        borderColor : "rgba(0, 0, 50, 1)",
+        borderWidth: 1,
+        data : [
+        {% for item in values[7] %}
+        "{{ item }}",
+        {% endfor %}
+        ],
+        spanGaps : false
+    }, {
+        label : "Nombre de 9emes velâges",
+        fill : true,
+        lineTension : 0.1,
+        backgroundColor : "rgba(50, 50, 50, 0.5)",
+        borderColor : "rgba(50, 50, 50, 1)",
+        borderWidth: 1,
+        data : [
+        {% for item in values[8] %}
+        "{{ item }}",
+        {% endfor %}
+        ],
+        spanGaps : false
     }]
 };
 var myChart = new Chart(ctx, {
@@ -55,13 +146,8 @@ var myChart = new Chart(ctx, {
     data: chartData,
     options: {
         scales: {
-            x: {
-                stacked: true
-            },
-            y: {
-                stacked: true,
-                beginAtZero: true
-            }
+            xAxes: [{ stacked: true }],
+            yAxes: [{ stacked: true }]
         }
     }
 });
