@@ -6,6 +6,6 @@ app = create_app()
 db = SQLAlchemy(app)
 
 if __name__ == '__main__' :  #Execute la ligne seulement si on execute le fichier directement
-    app.run(debug=True)  # Demarre le site et debug redémarre le site dès qu'un changement est fait
+    app.run(debug=False)  # Demarre le site
 
 #42
