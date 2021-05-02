@@ -155,11 +155,7 @@ def q3():
         dates[day.timetuple().tm_mon] = dates[day.timetuple().tm_mon] + 1 
     somme = db.session.query(Animaux).filter(Animaux.decede == 1).count()
     dates.pop(0)
-
-    #3.2
-    #animaux_db = db.engine.execute(text("SELECT COUNT(famille_id) FROM familles F, animaux A WHERE A.mort_ne = 1 AND  F.id = A.famille_id"))
-
-    return render_template('question3.html', labels=['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'], values=list(dates.values()))
+    return render_template('question3.html', labels=['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'], values=list(dates.values()), somme = somme)
 
 #Figure 4
 @views.route('/q4')

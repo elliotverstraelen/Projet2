@@ -1,92 +1,59 @@
 {% extends "base.html" %}
-{% block title %}Question 3{% endblock %}
+{% block title %}Question 4{% endblock %}
 {% block content %}
 <h1>Les données</h1>
+<h5>Il arrive malheureusement qu'un veau soit mort-né.
+    Pour en diminuer le nombre, il est utile de savoir quelles peuvent en être certaines causes.</h5>
+<h6>1. Y a-t-il un moment particulier durant l’année auquel plus de décès arrivent ?</h6>
+<h6>2. - Y a-t-il une famille particulière chez qui cela arrive plus souvent ?</h6>
+<h6>3. - Y a-t-il un père pour lequel cela arrive souvent </h6><br>
 
-<h5>Il arrive malheureusement qu'un veau soit mort-né. <br> Pour en diminuer le nombre, il est utile de savoir quelles peuvent en être certaines causes.</h5>
-
-<button type="button" class="collapsible">3.1 - Y a-t-il un moment particulier durant l’année auquel plus de décès arrivent ?</button>
-<div class="content">
-    <h5>Représentation par tableau</h5>
-    <table style="width:100%">
-        <thead>
-            <tr>
-                <th>Janvier</th>
-                <th>Février</th>
-                <th>Mars</th>
-                <th>Avril</th>
-                <th>Mai</th>
-                <th>Juin</th>
-                <th>Juillet</th>
-                <th>Août</th>
-                <th>Septembre</th>
-                <th>Octobre</th>
-                <th>Novembre</th>
-                <th>Décembre</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{values[0]}}</td>
-                <td>{{values[1]}}</td>
-                <td>{{values[2]}}</td>
-                <td>{{values[3]}}</td>
-                <td>{{values[4]}}</td>
-                <td>{{values[5]}}</td>
-                <td>{{values[6]}}</td>
-                <td>{{values[7]}}</td>
-                <td>{{values[8]}}</td>
-                <td>{{values[9]}}</td>
-                <td>{{values[10]}}</td>
-                <td>{{values[11]}}</td>
-                <td>{{values[12]}}</td>
-            </tr>
-        </tbody>
-    </table><br>
-    <h5>Représentation graphique</h5>
-    <canvas id="graphique3.1" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
-</div>
-
-<button type="button" class="collapsible">3.2 - Y a-t-il une famille particulière chez qui cela arrive plus souvent ?</button>
-<div class="content">
-    <h5>Représentation par tableau</h5>
-    <table></table><br>
-    <h5>Représentation graphique</h5>
-    <!--(stacked bar plot qui affiche, famille par famille, le nombre de vivants, mort-nés, et décès prématurés, en choisissant une unité de temps adéquate.)-->
-    <canvas id="graphique3.2" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
-</div>
-
-<button type="button" class="collapsible">3.3 - Y a-t-il un père pour lequel cela arrive souvent </button>
-<div class="content">
-    <h3>3.3</h3>
-    <h5>Représentation par tableau</h5>
-    <table></table><br>
-    <h5>Représentation graphique</h5>
-    <!--(stacked bar plot par père, affichant le nombre de vivants, mort-nés, et décès prématurés, en choisissant une unité de temps adéquate.)-->
-    <canvas id="graphique3.3" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
-</div>
-
-
+<h3>3.1</h3>
+<h5>Représentation par tableau</h5>
+<p>Nombre total de mort-nés par mois de Novembre 1990 à Novembre 2020</p>
+<table style="width:100%">
+    <thead>
+        <tr>
+            <th>Janvier</th>
+            <th>Février</th>
+            <th>Mars</th>
+            <th>Avril</th>
+            <th>Mai</th>
+            <th>Juin</th>
+            <th>Juillet</th>
+            <th>Août</th>
+            <th>Septembre</th>
+            <th>Octobre</th>
+            <th>Novembre</th>
+            <th>Décembre</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{values[0]}}</td>
+            <td>{{values[1]}}</td>
+            <td>{{values[2]}}</td>
+            <td>{{values[3]}}</td>
+            <td>{{values[4]}}</td>
+            <td>{{values[5]}}</td>
+            <td>{{values[6]}}</td>
+            <td>{{values[7]}}</td>
+            <td>{{values[8]}}</td>
+            <td>{{values[9]}}</td>
+            <td>{{values[10]}}</td>
+            <td>{{values[11]}}</td>
+            <td>{{ somme }}</td>
+        </tr>
+    </tbody>
+</table><br>
+<h5>Représentation graphique</h5>
+<!--(chart ou bar plot sur l’année)-->
+<canvas id="graphique3.1" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
 
 <script>
-    //script for the collapsable items
-    var coll = document.getElementsByClassName("collapsible");
-    var i;
 
-    for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var content = this.nextElementSibling;
-            if (content.style.display === "block") {
-                content.style.display = "none";
-            } else {
-                content.style.display = "block";
-            }
-        });
-    }
-</script>
-<script>
+
 var ctx = document.getElementById('graphique3.1').getContext('2d');
 var chartData = {
     labels : [
@@ -95,7 +62,7 @@ var chartData = {
     {% endfor %}
     ],
     datasets : [{
-        label : "Assets",
+        label : "mort-nés",
         fill : true,
         lineTension : 0.1,
         backgroundColor : "rgba(0, 100, 200, 0.5)",
@@ -121,72 +88,34 @@ var myChart = new Chart(ctx, {
     }
 });
 
-var ctx = document.getElementById('graphique3.2').getContext('2d');
-var chartData = {
-    labels : [
-    {% for item in labels %}
-    "{{ item }}",
-    {% endfor %}
-    ],
-    datasets : [{
-        label : "Assets",
-        fill : true,
-        lineTension : 0.1,
-        backgroundColor : "rgba(0, 100, 200, 0.5)",
-        borderColor : "rgba(0, 100, 200, 1)",
-        borderWidth: 1,
-        data : [
-        {% for item in values %}
-        "{{ item }}",
-        {% endfor %}
-        ],
-        spanGaps : false
-    }]
-};
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: chartData,
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-
-var ctx = document.getElementById('graphique3.3').getContext('2d');
-var chartData = {
-    labels : [
-    {% for item in labels %}
-    "{{ item }}",
-    {% endfor %}
-    ],
-    datasets : [{
-        label : "Assets",
-        fill : true,
-        lineTension : 0.1,
-        backgroundColor : "rgba(0, 100, 200, 0.5)",
-        borderColor : "rgba(0, 100, 200, 1)",
-        borderWidth: 1,
-        data : [
-        {% for item in values %}
-        "{{ item }}",
-        {% endfor %}
-        ],
-        spanGaps : false
-    }]
-};
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: chartData,
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
 </script>
-{% endblock %}
+
+
+
+
+<canvas id="graphique" width="200" height="50"></canvas>
+      <script>
+    // l'identifiant est celui du canevas
+	var ctx = document.getElementById('graphique').getContext('2d');
+	// création du graphique
+    var pourcentage_1 = ({{values[11]}} + {{values[0]}} + {{values[1]}} )  / {{somme}}; 
+    var pourcentage_2 = ({{values[2]}} + {{values[3]}} + {{values[4]}} ) / {{somme}}; 
+    var pourcentage_3 = ({{values[5]}} + {{values[6]}} + {{values[7]}} ) / {{somme}}; 
+    var pourcentage_4 = ({{values[8]}} + {{values[9]}} + {{values[10]}} ) / {{somme}}; 
+	var myChart = new Chart(ctx, {
+    type: 'pie',   // le type du graphique
+	data: {        // les données
+        labels: ['Hiver', 'Printemps', 'Été', 'Automne'],
+        datasets: [{ 
+                    label: 'votes',
+                    data: [pourcentage_1, pourcentage_2, pourcentage_3, pourcentage_4],
+                    backgroundColor: ["rgb(54, 162, 235)","rgb(255, 205, 86)", "rgb(255, 99, 132)", "rgb(255,69,0)"]
+                   }]
+	       }
+         }
+	);
+      </script> 
+<center><h3>pourcentage des mort-nés par saison</h3></center>  
+
+<p>Ici on peut constater que le nombre de mort-nés sont plus nombreux durant le mois d'Automne. Une raison possible serait la temperature pendant cette periode. Ce taux plus elevé de mort nés traduit une mauvaise accoutumance au froid chez les vaux nouveaux-nés</p>
+{% endblock %} 
