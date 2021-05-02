@@ -30,6 +30,4 @@
 => figure 2 dans question2.html
 => figure 3 dans question3.html
 => figure 4 dans question4.html
-=> figure 5 dans question5.html
-=> figure 6 dans question6.html
 => figure 7 dans question7.html
