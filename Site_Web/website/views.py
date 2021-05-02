@@ -524,6 +524,6 @@ def q7():
     return render_template('question7.html', labels=labels, values=values, value1=value1, value2=value2, value3=value3, father_list=father_list, somme1=somme1, somme2=somme2, somme3=somme3)
 
 #add data
-@views.route('/add_data')
-def add_data():
-    return render_template('add_data.html')
+@views.route('/test')
+def test():
+    return render_template('index.html')
