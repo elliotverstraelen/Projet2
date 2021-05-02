@@ -118,7 +118,7 @@ def q3():
     dates.pop(0)
 
     #3.2
-    animaux_db = db.engine.execute(text("SELECT COUNT(famille_id) FROM familles F, animaux A WHERE A.mort_ne = 1 AND  F.id = A.famille_id"))
+    #animaux_db = db.engine.execute(text("SELECT COUNT(famille_id) FROM familles F, animaux A WHERE A.mort_ne = 1 AND  F.id = A.famille_id"))
 
     return render_template('question3.html', labels=['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'], values=list(dates.values()))
 
