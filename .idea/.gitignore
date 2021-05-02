@@ -1,0 +1,5 @@
+# Default ignored files
+*.xml
+*.pyc
+../.vscode/settings.json
+Projet2.iml

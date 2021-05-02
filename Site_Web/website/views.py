@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template  # Permet de créer des routes vers les fichiers
+from flask import Blueprint, render_template, request  # Permet de créer des routes vers les fichiers
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.inspection import inspect
@@ -95,9 +95,48 @@ def q1():
 #Figure 2
 @views.route('/q2')
 def q2():
-    bar_labels=labels
-    bar_values=values
-    return render_template('question2.html', labels=labels, values=values)
+
+    # variable de bd dans laquelle sont stockées tous les velages dont c'est le PREMIER pour la mere
+    # (mere_id n'est pas encore passée)
+    # Avec le reste des infos comme par exemple la date, car après je dois filtrer par année
+    velages_1 = db.session.query(text('id')).from_statement(text('SELECT V.id FROM velages V')).all()
+
+    # variable de bd dans laquelle sont stockées tous les velages dont c'est le SECOND pour la mere
+    # (mere_id n'est pas encore passée)
+    # Avec le reste des infos comme par exemple la date, car après je dois filtrer par année
+    velages_2 = ...
+
+    # variable de bd dans laquelle sont stockées tous les velages dont c'est le TROISIÈME pour la mere
+    # (mere_id n'est pas encore passée)
+    # Avec le reste des infos comme par exemple la date, car après je dois filtrer par année
+    velages_3 = ...
+
+    # ETC.
+    velages_4 = []
+    velages_5 = []
+    velages_6 = []
+    velages_7 = []
+    velages_8 = []
+    velages_9 = []
+    velages_10 = []
+
+    bar_values = {}
+
+    for i in range(31):
+        bar_values[i] = [velages_1, velages_2, velages_3, velages_4, velages_5, velages_6, velages_7, velages_8,
+                         velages_9, velages_10]
+
+    date_db = db.session.query(text('date')).from_statement(text('SELECT V.date FROM velages V')).all()
+
+    bar_labels = ["1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998",
+                  "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007",
+                  "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016",
+                  "2017", "2018", "2019", "2020"]
+
+    return render_template('question2.html', labels=bar_labels, values=bar_values)
+
+
+
 
 #Figure 3
 @views.route('/q3')
@@ -128,14 +167,14 @@ def q4():
     import datetime
 
     dates = {}
-    for i in range(13) :
+    for i in range(13):
         dates[i] = 0
     date_db = db.session.query(text('date')).from_statement(text('SELECT V.date FROM animaux A, velages V, animaux_velages AV where A.decede = 1 AND AV.velage_id = V.id AND AV.animal_id = A.id')).all()
     listdates = []
     for day in date_db: 
         listdates.append(datetime.datetime.strptime(repr(day), "('%d/%m/%Y',)"))
     for day in listdates:
-        dates[day.timetuple().tm_mon] = dates[day.timetuple().tm_mon] + 1 
+        dates[day.timetuple().tm_mon] = dates[day.timetuple().tm_mon] + 1
     somme = db.session.query(Animaux).filter(Animaux.decede == 1).count()
     dates.pop(0)
     return render_template('question4.html', labels=['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'], values=list(dates.values()), somme=somme)
@@ -157,9 +196,68 @@ def q6():
 #Figure 7
 @views.route('/q7')
 def q7():
-    bar_labels=labels
-    bar_values=values
-    return render_template('question7.html', labels=labels, values=values)
+    import datetime
+
+    father_list_tupl = db.session.query(text('pere_id')).from_statement(text('SELECT V.pere_id FROM velages V')).all()
+    father_list = [father_list_tupl[0][0]]
+    for i in range(1, len(father_list_tupl)):
+        if father_list_tupl[i][0] not in father_list:
+            father_list.append(father_list_tupl[i][0])
+
+    
+
+    dates_gen1 = {}
+    dates_gen2 = {}
+    dates_gen3 = {}
+    for i in range(13):
+        dates_gen1[i] = 0
+        dates_gen2[i] = 0
+        dates_gen3[i] = 0
+
+    date_db = db.session.query(text('date')).from_statement(text('SELECT V.date FROM velages V WHERE V.pere_id = 5005')).all()
+
+    list_dates_tot = []
+
+    for day in date_db:
+        list_dates_tot.append(datetime.datetime.strptime(repr(day), "('%d/%m/%Y',)"))  #represente la date sous le format dd/mm/yy
+    
+
+    year_first_gen = list_dates_tot[0].timetuple().tm_year
+    list_date1 = []
+    list_date2 = []
+    list_date3 = []
+    for year in list_dates_tot:
+        if year.timetuple().tm_year == year_first_gen:
+            list_date1.append(year)
+        elif year.timetuple().tm_year == year_first_gen + 1:
+            list_date2.append(year)
+        elif year.timetuple().tm_year == year_first_gen + 2:
+            list_date3.append(year)
+
+    for day in list_date1:
+        dates_gen1[day.timetuple().tm_mon] = dates_gen1[day.timetuple().tm_mon] + 1
+
+    for day in list_date2:
+        dates_gen2[day.timetuple().tm_mon] = dates_gen2[day.timetuple().tm_mon] + 1
+    
+    for day in list_date3:
+        dates_gen3[day.timetuple().tm_mon] = dates_gen2[day.timetuple().tm_mon] + 1
+
+    dates_gen1.pop(0)
+    dates_gen2.pop(0)
+    dates_gen3.pop(0)
+
+    
+
+    value1 = list(dates_gen1.values())
+    value2 = list(dates_gen2.values())
+    value3 = list(dates_gen3.values())
+
+    somme1 = sum(value1)
+    somme2 = sum(value2)
+    somme3 = sum(value3)
+    labels = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+    return render_template('question7.html', labels=labels, values=values, value1=value1, value2=value2, value3=value3, father_list=father_list, somme1=somme1, somme2=somme2, somme3=somme3)
 
 #add data
 @views.route('/add_data')
