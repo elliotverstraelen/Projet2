@@ -96,35 +96,205 @@ def q1():
 @views.route('/q2')
 def q2():
 
-    # variable de bd dans laquelle sont stockées tous les velages dont c'est le PREMIER pour la mere
-    # (mere_id n'est pas encore passée)
-    # Avec le reste des infos comme par exemple la date, car après je dois filtrer par année
-    velages_1 = db.session.query(text('id')).from_statement(text('SELECT V.id FROM velages V')).all()
+    velages_id = db.session.query(text('id')).from_statement(text('SELECT V.id FROM velages V')).all()
+    velages_meres = db.session.query(text('mere_id')).from_statement(text('SELECT V.mere_id FROM velages V')).all()
+    velages_dates = db.session.query(text('date')).from_statement(text('SELECT V.date FROM velages V')).all()
 
-    # variable de bd dans laquelle sont stockées tous les velages dont c'est le SECOND pour la mere
-    # (mere_id n'est pas encore passée)
-    # Avec le reste des infos comme par exemple la date, car après je dois filtrer par année
-    velages_2 = ...
+    vl_meres = []
+    for p in velages_meres:
+        vl_meres.append(p[0])
+    print("vl_meres :", vl_meres)
+    # print(len(vl_meres))
 
-    # variable de bd dans laquelle sont stockées tous les velages dont c'est le TROISIÈME pour la mere
-    # (mere_id n'est pas encore passée)
-    # Avec le reste des infos comme par exemple la date, car après je dois filtrer par année
-    velages_3 = ...
+    vl_dates = []
+    for p in velages_dates:
+        vl_dates.append(p[0][6:])
+    print("vl_dates :", vl_dates)
 
-    # ETC.
-    velages_4 = []
-    velages_5 = []
-    velages_6 = []
-    velages_7 = []
-    velages_8 = []
-    velages_9 = []
-    velages_10 = []
+    v1 = []
+    v2 = []
+    v3 = []
+    v4 = []
+    v5 = []
+    v5 = []
+    v6 = []
+    v7 = []
+    v8 = []
+    v9 = []
 
-    bar_values = {}
+    d1 = []
+    d2 = []
+    d3 = []
+    d4 = []
+    d5 = []
+    d6 = []
+    d7 = []
+    d8 = []
+    d9 = []
 
-    for i in range(31):
-        bar_values[i] = [velages_1, velages_2, velages_3, velages_4, velages_5, velages_6, velages_7, velages_8,
-                         velages_9, velages_10]
+    for i in range(len(vl_meres)):
+        if vl_meres[i] not in v1:
+            v1.append(vl_meres[i])
+            d1.append(vl_dates[i])
+            continue
+        if vl_meres[i] not in v2:
+            v2.append(vl_meres[i])
+            d2.append(vl_dates[i])
+            continue
+        if vl_meres[i] not in v3:
+            v3.append(vl_meres[i])
+            d3.append(vl_dates[i])
+            continue
+        if vl_meres[i] not in v4:
+            v4.append(vl_meres[i])
+            d4.append(vl_dates[i])
+            continue
+        if vl_meres[i] not in v5:
+            v5.append(vl_meres[i])
+            d5.append(vl_dates[i])
+            continue
+        if vl_meres[i] not in v6:
+            v6.append(vl_meres[i])
+            d6.append(vl_dates[i])
+            continue
+        if vl_meres[i] not in v7:
+            v7.append(vl_meres[i])
+            d7.append(vl_dates[i])
+            continue
+        if vl_meres[i] not in v8:
+            v8.append(vl_meres[i])
+            d8.append(vl_dates[i])
+            continue
+        if vl_meres[i] not in v9:
+            v9.append(vl_meres[i])
+            d9.append(vl_dates[i])
+            continue
+
+    print(v1)
+    print(len(v1))
+    print(d1)
+    print(len(d1))
+    print(v2)
+    print(len(v2))
+    print(d2)
+    print(len(d2))
+
+    somme = len(v1) + len(v2) + len(v3) + len(v4) + len(v5) + len(v6) + len(v7) + len(v8) + len(v9)
+    print(somme)
+
+    premiersVelages = []
+    deuxiemesVelages = []
+    troisiemesVelages = []
+    quatriemesVelages = []
+    cinquiemesVelages = []
+    sixiemesVelages = []
+    septiemesVelages = []
+    huitiemesVelages = []
+    neuviemesVelages = []
+
+    nbr1 = 0
+    annee = d1[0]
+    for i in range((len(d1))):
+        if d1[i] == annee:
+            nbr1 += 1
+        else:
+            premiersVelages.append(nbr1)
+            nbr1 = 1
+            annee = d1[i]
+
+    print(premiersVelages)
+    print(sum(premiersVelages))
+
+    nbr1 = 0
+    annee = d2[0]
+    for i in range(len(d2)):
+        if d2[i] == annee:
+            nbr1 += 1
+        else:
+            deuxiemesVelages.append(nbr1)
+            nbr1 = 1
+            annee = d2[i]
+
+    print(deuxiemesVelages)
+
+    nbr1 = 0
+    annee = d3[0]
+    for i in range(len(d3)):
+        if d3[i] == annee:
+            nbr1 += 1
+        else:
+            troisiemesVelages.append(nbr1)
+            nbr1 = 1
+            annee = d3[i]
+
+    print(troisiemesVelages)
+
+    nbr1 = 0
+    annee = d4[0]
+    for i in range(len(d4)):
+        if d4[i] == annee:
+            nbr1 += 1
+        else:
+            quatriemesVelages.append(nbr1)
+            nbr1 = 1
+            annee = d4[i]
+
+    print(quatriemesVelages)
+
+    nbr1 = 0
+    annee = d5[0]
+    for i in range(len(d5)):
+        if d5[i] == annee:
+            nbr1 += 1
+        else:
+            cinquiemesVelages.append(nbr1)
+            nbr1 = 1
+            annee = d5[i]
+
+    print(cinquiemesVelages)
+
+    nbr1 = 0
+    annee = d2[0]
+    for i in range(len(d2)):
+        if d2[i] == annee:
+            nbr1 += 1
+        else:
+            deuxiemesVelages.append(nbr1)
+            nbr1 = 1
+            annee = d2[i]
+
+    print(deuxiemesVelages)
+
+    nbr1 = 0
+    annee = d2[0]
+    for i in range(len(d2)):
+        if d2[i] == annee:
+            nbr1 += 1
+        else:
+            deuxiemesVelages.append(nbr1)
+            nbr1 = 1
+            annee = d2[i]
+
+    print(deuxiemesVelages)
+
+    nbr1 = 0
+    annee = d2[0]
+    for i in range(len(d2)):
+        if d2[i] == annee:
+            nbr1 += 1
+        else:
+            deuxiemesVelages.append(nbr1)
+            nbr1 = 1
+            annee = d2[i]
+
+    print(deuxiemesVelages)
+
+    bar_values = [premiersVelages, deuxiemesVelages, troisiemesVelages, quatriemesVelages, cinquiemesVelages,
+                  sixiemesVelages, septiemesVelages, huitiemesVelages, neuviemesVelages]
+
+    # for i in range(31):
+    #    bar_values[i] = [velages_1, velages_2, velages_3, velages_4, velages_5, velages_6, velages_7, velages_8,
+    #                    velages_9, velages_10]
 
     date_db = db.session.query(text('date')).from_statement(text('SELECT V.date FROM velages V')).all()
 
@@ -134,6 +304,7 @@ def q2():
                   "2017", "2018", "2019", "2020"]
 
     return render_template('question2.html', labels=bar_labels, values=bar_values)
+
 
 
 
