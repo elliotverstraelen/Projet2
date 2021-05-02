@@ -30,8 +30,21 @@ var chartData = {
         borderColor : "rgba(0, 100, 200, 1)",
         borderWidth: 1,
         data : [
-        {% for item in values %}
-        "{{ item[0] }}",
+        {% for item in values[0] %}
+        "{{ item }}",
+        {% endfor %}
+        ],
+        spanGaps : false
+    }, {
+        label : "Nombre de second velâges",
+        fill : true,
+        lineTension : 0.1,
+        backgroundColor : "rgba(100, 0, 200, 0.5)",
+        borderColor : "rgba(100, 0, 200, 1)",
+        borderWidth: 1,
+        data : [
+        {% for item in values[1] %}
+        "{{ item }}",
         {% endfor %}
         ],
         spanGaps : false
