@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request  # Permet de créer des routes vers les fichiers
+from flask import Blueprint, render_template, request # Permet de créer des routes vers les fichiers
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.inspection import inspect
@@ -458,7 +458,7 @@ def q6():
     return render_template('question6.html', labels=labels, values=values)
 
 #Figure 7
-@views.route('/q7')
+@views.route('/q7', methods=['GET', 'POST']) # , methods = ['POST'])
 def q7():
     import datetime
 
@@ -468,7 +468,10 @@ def q7():
         if father_list_tupl[i][0] not in father_list:
             father_list.append(father_list_tupl[i][0])
 
-    
+    selected_father = 5002
+    if request.method == 'POST':
+        selected_father = request.form.get('pere')
+    print(selected_father)
 
     dates_gen1 = {}
     dates_gen2 = {}
@@ -478,7 +481,7 @@ def q7():
         dates_gen2[i] = 0
         dates_gen3[i] = 0
 
-    date_db = db.session.query(text('date')).from_statement(text('SELECT V.date FROM velages V WHERE V.pere_id = 5005')).all()
+    date_db = db.session.query(Velages.date).filter(Velages.pere_id == selected_father).all()
 
     list_dates_tot = []
 
@@ -521,7 +524,7 @@ def q7():
     somme2 = sum(value2)
     somme3 = sum(value3)
     labels = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
-    return render_template('question7.html', labels=labels, values=values, value1=value1, value2=value2, value3=value3, father_list=father_list, somme1=somme1, somme2=somme2, somme3=somme3)
+    return render_template('question7.html', labels=labels, values=values, value1=value1, value2=value2, value3=value3, father_list=father_list, somme1=somme1, somme2=somme2, somme3=somme3, selected=selected_father)
 
 #add data
 @views.route('/test')

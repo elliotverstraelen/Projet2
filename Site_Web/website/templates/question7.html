@@ -11,13 +11,14 @@
 <h3>7.1</h3>
 <h5>Représentation par tableau</h5>
 <p>Choisissez le taureau dont vous voulez observez le nombre de descendants: 
-    <form action="{{ url_for('views.q7')}}"> 
+    <form action="{{ url_for('views.q7')}}" method="POST"> 
         <div>
-            <SELECT name="pere" method="POST">
+            <SELECT name="pere">
                 {% for pere in father_list %}
-            <OPTION value="{{pere[0]}}">{{pere}}</OPTION>
+            <OPTION value="{{pere}}">{{pere}}</OPTION>
                 {% endfor %}
         </SELECT>
+        <button type="submit">Confirmer</button>
         </div>
     </form>
 </p>
