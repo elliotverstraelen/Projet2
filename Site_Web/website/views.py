@@ -46,51 +46,96 @@ def home():       #On ira donc sur la page 'home' lorsqu'il y'a '/' dans l'URL
 @views.route('/q1')
 def q1():
     import datetime
-    def add_28(date, j):
-        jour = int(date[0:2])
-        mois = int(date[3:5])
-        an = int(date[6:])
-        day_delta = datetime.timedelta(days=28)
-        start_date = datetime.datetime(an, mois, jour)
-        added_date = start_date + day_delta * j
-        new_jour = added_date.strftime("%d")
-        new_mois = added_date.strftime("%m")
-        new_an = added_date.strftime("%Y")
-        return "{}/{}/{}".format(new_jour, new_mois, new_an)
+    import ephem
+
+    def cycle_pour_jour(date_string):
+        """
+        In: une date sous forme de string
+        Out: la place du jour dans un cycle lunaire sur 28 jours
+        """
+        splitted_date_string = date_string.split("/")
+        jour = int(splitted_date_string[0])
+        mois = int(splitted_date_string[1])
+        an = int(splitted_date_string[2])
+        date = ephem.Date(datetime.date(an,mois,jour))
+        nnm = ephem.next_new_moon(date)
+        pnm = ephem.previous_new_moon(date)
+        lunation = (date-pnm)/(nnm-pnm)
+        return lunation*28
+    
+    # On extrait l'ensemble des dates de Velages
+    velages_date = db.session.query(Velages).filter(Velages.date).all()
+
+    # Initialisation des nbr de naissances par jour
     jour1 = jour2 = jour3 = jour4 = jour5 = jour6 = jour7 = jour8 = jour9 = jour10 = jour11 = jour12 = jour13 = jour14 = jour15 = jour16 = jour17 = jour18 = jour19 = jour20 = jour21 = jour22 = jour23 = jour24 = jour25 = jour26 = jour27 = jour28 = 0
-    for i in range(370):
-        jour1 += db.session.query(Velages).filter(Velages.date == add_28("03/11/1990", i)).count()
-        jour2 += db.session.query(Velages).filter(Velages.date == add_28("04/11/1990", i)).count()
-        jour3 += db.session.query(Velages).filter(Velages.date == add_28("05/11/1990", i)).count()
-        jour4 += db.session.query(Velages).filter(Velages.date == add_28("06/11/1990", i)).count()
-        jour5 += db.session.query(Velages).filter(Velages.date == add_28("07/11/1990", i)).count()
-        jour6 += db.session.query(Velages).filter(Velages.date == add_28("08/11/1990", i)).count()
-        jour7 += db.session.query(Velages).filter(Velages.date == add_28("09/11/1990", i)).count()
-        jour8 += db.session.query(Velages).filter(Velages.date == add_28("10/11/1990", i)).count()
-        jour9 += db.session.query(Velages).filter(Velages.date == add_28("11/11/1990", i)).count()
-        jour10 += db.session.query(Velages).filter(Velages.date == add_28("12/11/1990", i)).count()
-        jour11 += db.session.query(Velages).filter(Velages.date == add_28("13/11/1990", i)).count()
-        jour12 += db.session.query(Velages).filter(Velages.date == add_28("14/11/1990", i)).count()
-        jour13 += db.session.query(Velages).filter(Velages.date == add_28("15/11/1990", i)).count()
-        jour14 += db.session.query(Velages).filter(Velages.date == add_28("16/11/1990", i)).count()
-        jour15 += db.session.query(Velages).filter(Velages.date == add_28("17/11/1990", i)).count()
-        jour16 += db.session.query(Velages).filter(Velages.date == add_28("18/11/1990", i)).count()
-        jour17 += db.session.query(Velages).filter(Velages.date == add_28("19/11/1990", i)).count()
-        jour18 += db.session.query(Velages).filter(Velages.date == add_28("20/11/1990", i)).count()
-        jour19 += db.session.query(Velages).filter(Velages.date == add_28("21/11/1990", i)).count()
-        jour20 += db.session.query(Velages).filter(Velages.date == add_28("22/11/1990", i)).count()
-        jour21 += db.session.query(Velages).filter(Velages.date == add_28("23/11/1990", i)).count()
-        jour22 += db.session.query(Velages).filter(Velages.date == add_28("24/11/1990", i)).count()
-        jour23 += db.session.query(Velages).filter(Velages.date == add_28("25/11/1990", i)).count()
-        jour24 += db.session.query(Velages).filter(Velages.date == add_28("26/11/1990", i)).count()
-        jour25 += db.session.query(Velages).filter(Velages.date == add_28("27/11/1990", i)).count()
-        jour26 += db.session.query(Velages).filter(Velages.date == add_28("28/11/1990", i)).count()
-        jour27 += db.session.query(Velages).filter(Velages.date == add_28("29/11/1990", i)).count()
-        jour28 += db.session.query(Velages).filter(Velages.date == add_28("30/11/1990", i)).count()
+
+    # Pour chaque naissance enregistrées dans la base de données, itérer le jour du cycle lunaire correspondant au jour de la naissance
+    for naissance in velages_date:
+        jour_du_cycle = round(cycle_pour_jour(naissance.date))
+        if jour_du_cycle == 0:
+            jour28 += 1
+        if jour_du_cycle == 1:
+            jour1 += 1
+        if jour_du_cycle == 2:
+            jour2 += 1
+        if jour_du_cycle == 3:
+            jour3 += 1
+        if jour_du_cycle == 4:
+            jour4 += 1
+        if jour_du_cycle == 5:
+            jour5 += 1
+        if jour_du_cycle == 6:
+            jour6 += 1
+        if jour_du_cycle == 7:
+            jour7 += 1
+        if jour_du_cycle == 8:
+            jour8 += 1
+        if jour_du_cycle == 9:
+            jour9 += 1
+        if jour_du_cycle == 10:
+            jour10 += 1
+        if jour_du_cycle == 11:
+            jour11 += 1
+        if jour_du_cycle == 12:
+            jour12 += 1
+        if jour_du_cycle == 13:
+            jour13 += 1
+        if jour_du_cycle == 14:
+            jour14 += 1
+        if jour_du_cycle == 15:
+            jour15 += 1
+        if jour_du_cycle == 16:
+            jour16 += 1
+        if jour_du_cycle == 17:
+            jour17 += 1
+        if jour_du_cycle == 18:
+            jour18 += 1
+        if jour_du_cycle == 19:
+            jour19 += 1
+        if jour_du_cycle == 20:
+            jour20 += 1
+        if jour_du_cycle == 21:
+            jour21 += 1
+        if jour_du_cycle == 22:
+            jour22 += 1
+        if jour_du_cycle == 23:
+            jour23 += 1
+        if jour_du_cycle == 24:
+            jour24 += 1
+        if jour_du_cycle == 25:
+            jour25 += 1
+        if jour_du_cycle == 26:
+            jour26 += 1
+        if jour_du_cycle == 27:
+            jour27 += 1
+        if jour_du_cycle == 28:
+            jour28 += 1
+    
     labels = ["J1", "J2", "J3", "J4", "J5", "J6", "J7", "J8", "J9", "J10", "J11", "J12", "J13", "J14", "J15", "J16", "J17", "J18", "J19", "J20", "J21", "J22", "J23", "J24", "J25", "J26", "J27", "J28"]
     values = [jour1, jour2, jour3, jour4, jour5, jour6, jour7, jour8, jour9, jour10, jour11, jour12, jour13, jour14, jour15, jour16, jour17, jour18, jour19, jour20, jour21, jour22, jour23, jour24, jour25, jour26, jour27, jour28]
-    somme  = sum(values)
+    somme  = sum(values)    # Total des naissances (pour calculer un %tage)
     return render_template('question1.html', labels=labels, values=values, somme=somme)
+
 #Figure 2
 @views.route('/q2')
 def q2():
@@ -402,10 +447,6 @@ def q2():
 
     return render_template('question2.html', labels=bar_labels, values=bar_values)
 
-
-
-
-
 #Figure 3
 @views.route('/q3')
 def q3():
@@ -443,16 +484,7 @@ def q4():
     dates.pop(0)
     return render_template('question4.html', labels=['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'], values=list(dates.values()), somme=somme)
 
-#Figure 5
-@views.route('/q5')
-def q5():
-    bar_labels=labels
-    bar_values=values
-    return render_template('question5.html', labels=labels, values=values)
 
-#Figure 6
-@views.route('/q6')
-def q6():
     bar_labels=labels
     bar_values=values
     return render_template('question6.html', labels=labels, values=values)

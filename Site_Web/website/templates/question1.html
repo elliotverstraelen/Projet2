@@ -3,11 +3,11 @@
 {% block content %}
 <h1>Les données</h1>
 <h5>Une croyance populaire chez certains éleveurs est que les naissances arrivent plus souvent à la pleine lune.<br>Est-ce vrai ou pas ?</h5>
-<p>Il nous faut créer un graphique du pourcentage de vêlages sur 28 jours (durée du cycle lunaire).<br>
-    Afin d'avoir des données objectives sur le sujet, on va analyser les vêlages sur les 30 dernières années de Novembre 1990 à Novembre 2020 ou plus exactement les 370 cycles lunaires à partir du lendemain de la pleine lune du 02/11/1990.<br>
-    Le jour 1 correspond donc au lendemain de la pleine lune et le jour 28 à la pleine lune.</p>
+<p>Il nous faut créer un graphique du pourcentage de vêlages sur 28 jours.<br>
+    Afin d'avoir des données objectives sur le sujet, on va analyser les vêlages sur l'ensemble de la base de données, c'est-à-dire du 3/10/1990 au 19/12/2020.<br>
+    Le jour 14 correspond au jour de la pleine lune et le jour 28, le jour de la nouvelle lune.</p>
 <h3>Représentation par tableau</h3>
-<p>Nombre total de vêlages par jour du cycle lunaire de la pleine lune du 02 Novembre 1990 à Novembre 2020 (370 cycles lunaires au total)</p>
+<p>Nombre total de vêlages par jour du cycle lunaire du 3 Octobre 1990 au 19 Décembre 2020</p>
 <table style="width:100%">
     <thead>
         <tr>
@@ -24,7 +24,7 @@
             <th>{{ labels[10] }}</th>
             <th>{{ labels[11] }}</th>
             <th>{{ labels[12] }}</th>
-            <th>{{ labels[13] }}</th>
+            <th style="color:red;">{{ labels[13] }}</th>
             <th>{{ labels[14] }}</th>
             <th>{{ labels[15] }}</th>
             <th>{{ labels[16] }}</th>
@@ -57,7 +57,7 @@
             <td>{{ values[10] }}</td>
             <td>{{ values[11] }}</td>
             <td>{{ values[12] }}</td>
-            <td>{{ values[13] }}</td>
+            <td style="color:red;">{{ values[13] }}</td>
             <td>{{ values[14] }}</td>
             <td>{{ values[15] }}</td>
             <td>{{ values[16] }}</td>
@@ -77,11 +77,11 @@
     </tbody>
 </table><br>
 <h3>Représentation graphique</h3><br>
-<h5 style="text-align:center">Bar chart du pourcentage de vêlages par jour du cycle lunaire</h5>
+<h5 style="text-align:center">Bar chart du pourcentage de vêlages par jour du cycle lunaire du 3 Octobre 1990 au 19 Décembre 2020</h5>
 <canvas id="graphique1" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
 <p>Maintenant que nous disposons de données suffisantes pour répondre à la question, on peut constater que la réponse est <b>non</b>.<br>
-    En effet, le pourcentage de naissances n'est pas significativement plus élevé le jour de la pleine lune par rapport aux autres jours du cycle lunaire.<br>
-    On peut cependant noter que le 18ème jour du cycle lunaire enregistre un pourcentage généralement plus élevé de naissances tandis que le 22ème jour enregistre un pourcentage légèrement plus bas</p><br><br>
+    En effet, le pourcentage de naissances n'est pas plus élevé le jour de la pleine lune (J14) par rapport aux autres jours du cycle lunaire et reste plutôt dans la moyenne.<br>
+    On peut même noter que le lendemain de la nouvelle lune (J1) enregistre un pourcentage généralement plus élevé de naissances tandis que le 19ème jour enregistre un pourcentage significativement plus bas.</p>
 
 
 <script>
@@ -96,8 +96,8 @@ var chartData = {
         label : "% de vêlages",
         fill : true,
         lineTension : 0.1,
-        backgroundColor : "rgba(0, 100, 200, 0.5)",
-        borderColor : "rgba(0, 100, 200, 1)",
+        backgroundColor : ["rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(255, 0, 0, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)", "rgba(0, 100, 200, 0.5)"],
+        borderColor : ["rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(255, 0, 0, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)", "rgba(0, 100, 200, 1)"],
         borderWidth: 1,
         data : [
         {% for compte in values %}
