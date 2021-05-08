@@ -1,15 +1,10 @@
 from flask import Blueprint, render_template, request # Permet de créer des routes vers les fichiers
-from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.automap import automap_base
-from sqlalchemy.inspection import inspect
-from sqlalchemy import extract
 from sqlalchemy.sql import text
-import os
 
 views = Blueprint('views', __name__)
 
 from main import db
- 
 
 
 Base = automap_base()
@@ -29,13 +24,7 @@ Animaux_velages = Animaux.velages_collection
 
 
 
-
-
 # ROUTES & DATA
-
-# Listes vide pour que les figures non modifiés continuent de fonctionner
-labels = []
-values = []
 
 #Routes
 @views.route('/') # Il s'agit de ce qu'il y a dans l'URL, '/' veut dire pas de prefixe
@@ -43,7 +32,7 @@ def home():       #On ira donc sur la page 'home' lorsqu'il y'a '/' dans l'URL
     return render_template("home.html")
 
 #Figure 1
-@views.route('/q1')
+@views.route('/velages_et_pleine_lune')
 def q1():
     import datetime
     import ephem
@@ -137,7 +126,7 @@ def q1():
     return render_template('question1.html', labels=labels, values=values, somme=somme)
 
 #Figure 2
-@views.route('/q2')
+@views.route('/velages_multiples_par_vaches')
 def q2():
 
     velages_id = db.session.query(text('id')).from_statement(text('SELECT V.id FROM velages V')).all()
@@ -448,7 +437,7 @@ def q2():
     return render_template('question2.html', labels=bar_labels, values=bar_values)
 
 #Figure 3
-@views.route('/q3')
+@views.route('/morts-nes')
 def q3():
     #3.1
     import datetime
@@ -467,7 +456,7 @@ def q3():
     return render_template('question3.html', labels=['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'], values=list(dates.values()), somme = somme)
 
 #Figure 4
-@views.route('/q4')
+@views.route('/deces_prematures')
 def q4():
     import datetime
 
@@ -490,7 +479,7 @@ def q4():
     return render_template('question6.html', labels=labels, values=values)
 
 #Figure 7
-@views.route('/q7', methods=['GET', 'POST']) # , methods = ['POST'])
+@views.route('/descendance_des_taureaux', methods=['GET', 'POST']) # , methods = ['POST'])
 def q7():
     import datetime
 
@@ -556,7 +545,7 @@ def q7():
     somme2 = sum(value2)
     somme3 = sum(value3)
     labels = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
-    return render_template('question7.html', labels=labels, values=values, value1=value1, value2=value2, value3=value3, father_list=father_list, somme1=somme1, somme2=somme2, somme3=somme3, selected=selected_father)
+    return render_template('question7.html', labels=labels, value1=value1, value2=value2, value3=value3, father_list=father_list, somme1=somme1, somme2=somme2, somme3=somme3, selected=selected_father)
 
 #add data
 @views.route('/test')
