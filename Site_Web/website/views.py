@@ -53,14 +53,14 @@ def q1():
         return lunation*28
     
     # On extrait l'ensemble des dates de Velages
-    velages_date = db.session.query(Velages).filter(Velages.date).all()
+    velages_date = db.session.query(text('date')).from_statement(text('SELECT V.date FROM velages V')).all()
 
     # Initialisation des nbr de naissances par jour
     jour1 = jour2 = jour3 = jour4 = jour5 = jour6 = jour7 = jour8 = jour9 = jour10 = jour11 = jour12 = jour13 = jour14 = jour15 = jour16 = jour17 = jour18 = jour19 = jour20 = jour21 = jour22 = jour23 = jour24 = jour25 = jour26 = jour27 = jour28 = 0
 
     # Pour chaque naissance enregistrées dans la base de données, itérer le jour du cycle lunaire correspondant au jour de la naissance
     for naissance in velages_date:
-        jour_du_cycle = round(cycle_pour_jour(naissance.date))
+        jour_du_cycle = round(cycle_pour_jour(naissance[0]))
         if jour_du_cycle == 0:
             jour28 += 1
         if jour_du_cycle == 1:
@@ -122,7 +122,7 @@ def q1():
     
     labels = ["J1", "J2", "J3", "J4", "J5", "J6", "J7", "J8", "J9", "J10", "J11", "J12", "J13", "J14", "J15", "J16", "J17", "J18", "J19", "J20", "J21", "J22", "J23", "J24", "J25", "J26", "J27", "J28"]
     values = [jour1, jour2, jour3, jour4, jour5, jour6, jour7, jour8, jour9, jour10, jour11, jour12, jour13, jour14, jour15, jour16, jour17, jour18, jour19, jour20, jour21, jour22, jour23, jour24, jour25, jour26, jour27, jour28]
-    somme  = sum(values)    # Total des naissances (pour calculer un %tage)
+    somme = sum(values)    # Total des naissances (pour calculer un %tage)
     return render_template('question1.html', labels=labels, values=values, somme=somme)
 
 #Figure 2
@@ -148,7 +148,6 @@ def q2():
     v2 = []
     v3 = []
     v4 = []
-    v5 = []
     v5 = []
     v6 = []
     v7 = []
@@ -492,7 +491,7 @@ def q7():
     selected_father = 5002
     if request.method == 'POST':
         selected_father = request.form.get('pere')
-    print(selected_father)
+    #print(selected_father)
 
     dates_gen1 = {}
     dates_gen2 = {}
