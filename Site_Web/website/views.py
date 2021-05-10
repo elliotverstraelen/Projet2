@@ -478,20 +478,19 @@ def q4():
     return render_template('question6.html', labels=labels, values=values)
 
 #Figure 7
-@views.route('/descendance_des_taureaux', methods=['GET', 'POST']) # , methods = ['POST'])
+@views.route('/descendance_des_taureaux', methods=['GET', 'POST']) 
 def q7():
     import datetime
 
-    father_list_tupl = db.session.query(text('pere_id')).from_statement(text('SELECT V.pere_id FROM velages V')).all()
+    father_list_tupl = db.session.query(text('pere_id')).from_statement(text('SELECT V.pere_id FROM velages V')).all()  # Crée une liste de tuple des id des pères dans le tableau Velages
     father_list = [father_list_tupl[0][0]]
-    for i in range(1, len(father_list_tupl)):
+    for i in range(1, len(father_list_tupl)):    # Crée une liste des id des pères dans le tableau Velages
         if father_list_tupl[i][0] not in father_list:
             father_list.append(father_list_tupl[i][0])
 
-    selected_father = 5002
+    selected_father = 5002  #Initie la valeur du graphique au premier taureau
     if request.method == 'POST':
-        selected_father = request.form.get('pere')
-    #print(selected_father)
+        selected_father = request.form.get('pere') # Récupère les donnée du dropdown menu
 
     dates_gen1 = {}
     dates_gen2 = {}
@@ -501,28 +500,29 @@ def q7():
         dates_gen2[i] = 0
         dates_gen3[i] = 0
 
-    date_db = db.session.query(Velages.date).filter(Velages.pere_id == selected_father).all()
+    date_db = db.session.query(Velages.date).filter(Velages.pere_id == selected_father).all() # Récupère les dates des velages avec le même père
 
     list_dates_tot = []
 
     for day in date_db:
-        list_dates_tot.append(datetime.datetime.strptime(repr(day), "('%d/%m/%Y',)"))  #represente la date sous le format dd/mm/yy
+        list_dates_tot.append(datetime.datetime.strptime(repr(day), "('%d/%m/%Y',)"))  #Représente la liste des dates avec le même père sous format dd/mm/yy
     
 
-    year_first_gen = list_dates_tot[0].timetuple().tm_year
+    year_first_gen = list_dates_tot[0].timetuple().tm_year # Récupère l'année de la première génération
     list_date1 = []
     list_date2 = []
     list_date3 = []
-    for year in list_dates_tot:
-        if year.timetuple().tm_year == year_first_gen:
+    
+    for year in list_dates_tot: 
+        if year.timetuple().tm_year == year_first_gen:   # Ajoute à la liste des dates les veaux de génération 1
             list_date1.append(year)
-        elif year.timetuple().tm_year == year_first_gen + 1:
+        elif year.timetuple().tm_year == year_first_gen + 1:  # Ajoute à la liste des dates les veaux de génération 2
             list_date2.append(year)
-        elif year.timetuple().tm_year == year_first_gen + 2:
+        elif year.timetuple().tm_year == year_first_gen + 2:  # Ajoute à la liste des dates les veaux de génération 3
             list_date3.append(year)
 
     for day in list_date1:
-        dates_gen1[day.timetuple().tm_mon] = dates_gen1[day.timetuple().tm_mon] + 1
+        dates_gen1[day.timetuple().tm_mon] = dates_gen1[day.timetuple().tm_mon] + 1  # Pour chaque date de veaux on incrémente de 1 dans le dict des naissances par mois par génération
 
     for day in list_date2:
         dates_gen2[day.timetuple().tm_mon] = dates_gen2[day.timetuple().tm_mon] + 1
@@ -536,11 +536,11 @@ def q7():
 
     
 
-    value1 = list(dates_gen1.values())
+    value1 = list(dates_gen1.values()) #On récupère les valeurs du dict par génération
     value2 = list(dates_gen2.values())
     value3 = list(dates_gen3.values())
 
-    somme1 = sum(value1)
+    somme1 = sum(value1) # On récupère le total des naissances par générations
     somme2 = sum(value2)
     somme3 = sum(value3)
     labels = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']

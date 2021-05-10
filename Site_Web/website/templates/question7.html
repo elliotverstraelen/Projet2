@@ -4,9 +4,8 @@
 <h1>Les données</h1>
 <h5>Le vendeur de dose d’insémination nous propose de racheter des doses d’un taureau ou d’un enfant 
     d’un taureau que nous avons déjà eu. Nous pouvons utiliser les données des veaux déjà nés pour évaluer le taureau au sein de notre ferme.</h5>
-<h6>1. Quel fut son utilisation ?</h6>
-<h6>2. Quelles sont ses statistiques ?</h6>
-<h6>3. Combien de descendantes avons-nous encore (filles, petites filles, arrière petites filles, stack bar chart par taureau) ?</h6><br>
+<h6>1. Quel fut son utilisation ? C'est à dire, quelle fut le nombre de naissance de première génération, de seconde génération et de troisième génération ?
+</h6><br>
 
 <h3>7.1</h3>
 <h5>Représentation par tableau</h5>
@@ -18,7 +17,7 @@
             <OPTION value="{{pere}}">{{pere}}</OPTION>
                 {% endfor %}
         </SELECT>
-        <button type="submit">Confirmer</button>
+        <button type="submit" class="btn btn-primary">Confirmer</button>
         </div>
     </form>
 </p>
@@ -96,30 +95,7 @@
 <!--(graphe par mois du nombre de veau né de ce taureau, veau de 2ème génération, de 3ème génération)-->
 <canvas id="graphique7.1" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
 
-<!--<h3>7.2</h3>
-<h5>Représentation par tableau</h5>
-<table></table><br>
-<h5>Représentation graphique</h5>
-   (% femelle, % jumaux, % mort né/DCD, % problèmes, …)
-<canvas id="graphique7.2" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
-
-<h3>7.3</h3>
-<h5>Représentation par tableau</h5>
-<table></table><br>
-<h5>Représentation graphique</h5>-->
-
-
-
-<!--(stack bar chart par taureau)
-<canvas id="graphique7.3" width="50" height="25" class="chartjs-render-monitor" style="display: block; width: 0px; height: 0px;"></canvas><br>
--->
-
-
-
-
-
 <script>
-
 
 var ctx = document.getElementById('graphique7.1').getContext('2d');
 var chartData = {
@@ -183,72 +159,5 @@ var myChart = new Chart(ctx, {
 
 </script>
 
-<!--var ctx = document.getElementById('graphique7.2').getContext('2d');
-var chartData = {
-    labels : [
-    {% for item in labels %}
-    "{{ item }}",
-    {% endfor %}
-    ],
-    datasets : [{
-        label : "Assets",
-        fill : true,
-        lineTension : 0.1,
-        backgroundColor : "rgba(0, 100, 200, 0.5)",
-        borderColor : "rgba(0, 100, 200, 1)",
-        borderWidth: 1,
-        data : [
-        {% for item in values %}
-        "{{ item }}",
-        {% endfor %}
-        ],
-        spanGaps : false
-    }]
-};
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: chartData,
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
 
-var ctx = document.getElementById('graphique7.3').getContext('2d');
-var chartData = {
-    labels : [
-    {% for item in labels %}
-    "{{ item }}",
-    {% endfor %}
-    ],
-    datasets : [{
-        label : "Assets",
-        fill : true,
-        lineTension : 0.1,
-        backgroundColor : "rgba(0, 100, 200, 0.5)",
-        borderColor : "rgba(0, 100, 200, 1)",
-        borderWidth: 1,
-        data : [
-        {% for item in values %}
-        "{{ item }}",
-        {% endfor %}
-        ],
-        spanGaps : false
-    }]
-};
-var myChart = new Chart(ctx, {
-    type: 'line',
-    data: chartData,
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});-->
-</script>
 {% endblock %}
