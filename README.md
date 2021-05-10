@@ -14,6 +14,7 @@ Voici les différentes technologies utilisées durant ce projet:
 - [Flask] - Framework pour Python
 - [SQL] - Pour communiquer avec la base de donnée via des requêtes
 - [SQLOnline] - Outil online de visualisation de la base de données
+- [ephem] - bibliothèque qui implémente des algorithmes astronomiques
 
 Ce projet est évidemment disponible sous licence Open-Source sur Github.
 
@@ -21,7 +22,7 @@ Ce projet est évidemment disponible sous licence Open-Source sur Github.
 
 Ce projet requiert: [Flask](https://flask.palletsprojects.com/en/1.1.x/) 
 
-Installez les dépendances et démarrez le serveur.
+Installez les dépendances et démarrez le serveur. 
 
 ```sh
 cd Site_Web
