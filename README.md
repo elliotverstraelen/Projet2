@@ -15,19 +15,19 @@ Voici les différentes technologies utilisées durant ce projet:
 - [SQL] - Pour communiquer avec la base de donnée via des requêtes
 - [SQLOnline] - Outil online de visualisation de la base de données
 
-Ce projet est évidemment disponible sous liscence Open-Source sur Github.
+Ce projet est évidemment disponible sous licence Open-Source sur Github.
 
 ## Installation
 
 Ce projet requiert: [Flask](https://flask.palletsprojects.com/en/1.1.x/) 
 
-Installer les dépendances et démarrer le serveur.
+Installez les dépendances et démarrez le serveur.
 
 ```sh
 cd Site_Web
 python main.py
 ```
-Cliquer sur le lien dans la console ou ouvrir http://localhost:5000
+Cliquez sur le lien dans la console ou ouvrez http://localhost:5000
 
 
  
