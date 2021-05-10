@@ -19,12 +19,12 @@ Ce projet est évidemment disponible sous licence Open-Source sur Github.
 
 ## Installation
 
-Ce projet requiert: [Flask](https://flask.palletsprojects.com/en/1.1.x/) 
+Ce projet requiert: [Flask](https://flask.palletsprojects.com/en/1.1.x/) et [ephem](https://pypi.org/project/ephem/)
 
 Installez les dépendances et démarrez le serveur.
 
 ```sh
-cd Site_Web
+cd Projet2\Site_Web
 python main.py
 ```
 Cliquez sur le lien dans la console ou ouvrez http://localhost:5000
